@@ -33,6 +33,7 @@
 		C97B2BAB24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BAA24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift */; };
 		C97B2BAE24A9AEB0003518A0 /* JsonForTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BAD24A9AEB0003518A0 /* JsonForTests.swift */; };
 		C97B2BB024A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */; };
+		C97B2BB224AA63A6003518A0 /* ITunesRSSFeedResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BB124AA63A6003518A0 /* ITunesRSSFeedResults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		C97B2BAA24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
 		C97B2BAD24A9AEB0003518A0 /* JsonForTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonForTests.swift; sourceTree = "<group>"; };
 		C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesRSSFeedGeneratorTests.swift; sourceTree = "<group>"; };
+		C97B2BB124AA63A6003518A0 /* ITunesRSSFeedResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesRSSFeedResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				C97B2BA624A9AC79003518A0 /* ITunesRSSFeedGenerator.swift */,
 				C97B2BAA24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift */,
 				C97B2BA824A9ADE0003518A0 /* URLSessionProtocol.swift */,
+				C97B2BB124AA63A6003518A0 /* ITunesRSSFeedResults.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				C97B2BAB24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift in Sources */,
 				C97B2B8F24A97E1D003518A0 /* ShowAlbumsViewController.swift in Sources */,
 				C97B2B8E24A97E1D003518A0 /* ShowAlbumsModels.swift in Sources */,
+				C97B2BB224AA63A6003518A0 /* ITunesRSSFeedResults.swift in Sources */,
 				C97B2BA724A9AC79003518A0 /* ITunesRSSFeedGenerator.swift in Sources */,
 				C97B2B9024A97E1D003518A0 /* ShowAlbumsInteractor.swift in Sources */,
 				C97B2BA924A9ADE0003518A0 /* URLSessionProtocol.swift in Sources */,
