@@ -108,4 +108,23 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
             }
         }
     }
+    func testFetchDataSuccessWithDataAndNoError() {
+        // Given
+        let sessionMock = URLSessionSpy()
+        sessionMock.injectableDataTaskData = "{}".data(using: .utf8)
+        sut.session = sessionMock
+        let completionExpectation = expectation(description: "fetchData should call completionHandler.")
+        // When
+        sut.fetchData { (data, error) in
+            // Then
+            XCTAssertNil(error, "On success of fetchData error should be nil.")
+            XCTAssertNotNil(data, "On success of fetchData data should not be nil.")
+            completionExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
 }

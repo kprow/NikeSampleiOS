@@ -31,17 +31,16 @@ struct ITunesRSSFeedGenerator: ITunesAPIProtocol {
         if let url = URL(string: baseURL) {
             let request = URLRequest(url: url)
             session.dataTask(with: request) { (data, _, error) in
-                guard error == nil else {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    guard error == nil else {
                         completionHandler(nil, error)
+                        return
                     }
-                    return
-                }
-                guard let data = data else {
-                    DispatchQueue.main.async {
+                    guard let data = data else {
                         completionHandler(nil, FeedError.noData)
+                        return
                     }
-                    return
+                    completionHandler(data, nil)
                 }
             }.resume()
         }
