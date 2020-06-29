@@ -25,6 +25,8 @@
 		C97B2B9924A989F3003518A0 /* ShowAlbumsWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9524A989F3003518A0 /* ShowAlbumsWorkerTests.swift */; };
 		C97B2B9A24A989F3003518A0 /* ShowAlbumsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */; };
 		C97B2B9C24A98B1B003518A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9B24A98B1B003518A0 /* Constants.swift */; };
+		C97B2B9F24A99F6A003518A0 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9E24A99F6A003518A0 /* Genre.swift */; };
+		C97B2BA124A99FCD003518A0 /* ModelsCreationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BA024A99FCD003518A0 /* ModelsCreationTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		C97B2B9524A989F3003518A0 /* ShowAlbumsWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsWorkerTests.swift; sourceTree = "<group>"; };
 		C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsPresenterTests.swift; sourceTree = "<group>"; };
 		C97B2B9B24A98B1B003518A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C97B2B9E24A99F6A003518A0 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		C97B2BA024A99FCD003518A0 /* ModelsCreationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsCreationTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +124,9 @@
 		C97B2B4E24A96F4D003518A0 /* NikeSampleiOS */ = {
 			isa = PBXGroup;
 			children = (
-				C97B2B8024A96F74003518A0 /* UseCases */,
 				C97B2B7F24A96F61003518A0 /* Common */,
+				C97B2B9D24A99F18003518A0 /* Models */,
+				C97B2B8024A96F74003518A0 /* UseCases */,
 				C97B2B4F24A96F4D003518A0 /* AppDelegate.swift */,
 				C97B2B5124A96F4D003518A0 /* SceneDelegate.swift */,
 				C97B2B5824A96F4D003518A0 /* Assets.xcassets */,
@@ -137,6 +142,7 @@
 				C97B2B9124A989C2003518A0 /* UseCases */,
 				C97B2B6624A96F4E003518A0 /* NikeSampleiOSTests.swift */,
 				C97B2B6824A96F4E003518A0 /* Info.plist */,
+				C97B2BA024A99FCD003518A0 /* ModelsCreationTest.swift */,
 			);
 			path = NikeSampleiOSTests;
 			sourceTree = "<group>";
@@ -196,6 +202,14 @@
 				C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */,
 			);
 			path = ShowAlbums;
+			sourceTree = "<group>";
+		};
+		C97B2B9D24A99F18003518A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C97B2B9E24A99F6A003518A0 /* Genre.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,6 +373,7 @@
 				C97B2B9024A97E1D003518A0 /* ShowAlbumsInteractor.swift in Sources */,
 				C97B2B9C24A98B1B003518A0 /* Constants.swift in Sources */,
 				C97B2B8C24A97E1D003518A0 /* ShowAlbumsWorker.swift in Sources */,
+				C97B2B9F24A99F6A003518A0 /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C97B2BA124A99FCD003518A0 /* ModelsCreationTest.swift in Sources */,
 				C97B2B9A24A989F3003518A0 /* ShowAlbumsPresenterTests.swift in Sources */,
 				C97B2B9924A989F3003518A0 /* ShowAlbumsWorkerTests.swift in Sources */,
 				C97B2B6724A96F4E003518A0 /* NikeSampleiOSTests.swift in Sources */,

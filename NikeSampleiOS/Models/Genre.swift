@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+struct Genre: Equatable, Codable {
+    let genreId: String?
+    let name: String?
+    let url: String?
+}

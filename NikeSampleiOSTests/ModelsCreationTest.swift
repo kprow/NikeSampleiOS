@@ -7,27 +7,26 @@
 //
 
 import XCTest
+@testable import NikeSampleiOS
 
 class ModelsCreationTest: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testGenreIsCreatedWithJSON() {
+        // Given
+        let genreJSON =
+"""
+{
+  "genreId": "20",
+  "name": "Alternative",
+  "url": "https://itunes.apple.com/us/genre/id20"
+}
+"""
+        // When
+        let genre = try? JSONDecoder().decode(Genre.self, from: genreJSON.data(using: .utf8) ?? Data())
+        // Then
+        XCTAssertNotNil(genre, "Creating a genre from json should succeed.")
+        XCTAssertNotNil(genre?.genreId, "Creating a genre from json should succeed with valid id.")
+        XCTAssertNotNil(genre?.name, "Creating a genre from json should succeed with valid name.")
+        XCTAssertNotNil(genre?.url, "Creating a genre from json should succeed with valid url string.")
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
