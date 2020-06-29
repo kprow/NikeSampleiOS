@@ -26,7 +26,7 @@
 		C97B2B9A24A989F3003518A0 /* ShowAlbumsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */; };
 		C97B2B9C24A98B1B003518A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9B24A98B1B003518A0 /* Constants.swift */; };
 		C97B2B9F24A99F6A003518A0 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9E24A99F6A003518A0 /* Genre.swift */; };
-		C97B2BA124A99FCD003518A0 /* ModelsCreationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BA024A99FCD003518A0 /* ModelsCreationTest.swift */; };
+		C97B2BA324A9A2CB003518A0 /* ModelCreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BA224A9A2CB003518A0 /* ModelCreationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +72,7 @@
 		C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsPresenterTests.swift; sourceTree = "<group>"; };
 		C97B2B9B24A98B1B003518A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C97B2B9E24A99F6A003518A0 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
-		C97B2BA024A99FCD003518A0 /* ModelsCreationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsCreationTest.swift; sourceTree = "<group>"; };
+		C97B2BA224A9A2CB003518A0 /* ModelCreationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCreationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,9 +140,9 @@
 			isa = PBXGroup;
 			children = (
 				C97B2B9124A989C2003518A0 /* UseCases */,
+				C97B2BA224A9A2CB003518A0 /* ModelCreationTests.swift */,
 				C97B2B6624A96F4E003518A0 /* NikeSampleiOSTests.swift */,
 				C97B2B6824A96F4E003518A0 /* Info.plist */,
-				C97B2BA024A99FCD003518A0 /* ModelsCreationTest.swift */,
 			);
 			path = NikeSampleiOSTests;
 			sourceTree = "<group>";
@@ -381,9 +381,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C97B2BA124A99FCD003518A0 /* ModelsCreationTest.swift in Sources */,
 				C97B2B9A24A989F3003518A0 /* ShowAlbumsPresenterTests.swift in Sources */,
 				C97B2B9924A989F3003518A0 /* ShowAlbumsWorkerTests.swift in Sources */,
+				C97B2BA324A9A2CB003518A0 /* ModelCreationTests.swift in Sources */,
 				C97B2B6724A96F4E003518A0 /* NikeSampleiOSTests.swift in Sources */,
 				C97B2B9724A989F3003518A0 /* ShowAlbumsViewControllerTests.swift in Sources */,
 				C97B2B9824A989F3003518A0 /* ShowAlbumsInteractorTests.swift in Sources */,
