@@ -10,12 +10,15 @@ import Foundation
 
 /// Definition of how we make requests agains the iTunes API
 protocol ITunesAPIProtocol {
+    /// Fetches the data from the iTunes RSS feed generator
+    /// - Parameter completionHandler: returns Data on success or an Error
     func fetchData(_ completionHandler: @escaping (Data?, Error?) -> Void)
 }
 
 /// Implementation of iTunes API
 struct ITunesRSSFeedGenerator: ITunesAPIProtocol {
 
+    /// The url used to fetch rss feed
     private let baseURL =
     "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/10/explicit.json"
 
@@ -34,7 +37,19 @@ struct ITunesRSSFeedGenerator: ITunesAPIProtocol {
                     }
                     return
                 }
+                guard let data = data else {
+                    DispatchQueue.main.async {
+                        completionHandler(nil, FeedError.noData)
+                    }
+                    return
+                }
             }.resume()
         }
+    }
+}
+extension ITunesRSSFeedGenerator {
+    /// Error enum for the feed generator in case something goes wrong.
+    enum FeedError: Error, Equatable {
+        case noData
     }
 }

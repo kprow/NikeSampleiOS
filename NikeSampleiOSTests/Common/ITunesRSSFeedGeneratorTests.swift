@@ -86,4 +86,26 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
             }
         }
     }
+    func testFetchDataWithNoDataCallsCompletionHandlerWithError() {
+        // Given
+        let sessionMock = URLSessionSpy()
+        sessionMock.injectableDataTaskData = nil
+        sut.session = sessionMock
+        let completionExpectation = expectation(description: "fetchData should call completionHandler.")
+        // When
+        sut.fetchData { (_, error) in
+            // Then
+            XCTAssertNotNil(error)
+            XCTAssertTrue(error is ITunesRSSFeedGenerator.FeedError,
+                           "The error returned in the completion handler should be the FeedError")
+            XCTAssertEqual( .noData, error as? ITunesRSSFeedGenerator.FeedError,
+                           "The error returned in the completion handler should be .noData")
+            completionExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
 }
