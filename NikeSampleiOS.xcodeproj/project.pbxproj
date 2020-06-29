@@ -20,6 +20,10 @@
 		C97B2B8E24A97E1D003518A0 /* ShowAlbumsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B8824A97E1D003518A0 /* ShowAlbumsModels.swift */; };
 		C97B2B8F24A97E1D003518A0 /* ShowAlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B8924A97E1D003518A0 /* ShowAlbumsViewController.swift */; };
 		C97B2B9024A97E1D003518A0 /* ShowAlbumsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B8A24A97E1D003518A0 /* ShowAlbumsInteractor.swift */; };
+		C97B2B9724A989F3003518A0 /* ShowAlbumsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9324A989F3003518A0 /* ShowAlbumsViewControllerTests.swift */; };
+		C97B2B9824A989F3003518A0 /* ShowAlbumsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9424A989F3003518A0 /* ShowAlbumsInteractorTests.swift */; };
+		C97B2B9924A989F3003518A0 /* ShowAlbumsWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9524A989F3003518A0 /* ShowAlbumsWorkerTests.swift */; };
+		C97B2B9A24A989F3003518A0 /* ShowAlbumsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +63,10 @@
 		C97B2B8824A97E1D003518A0 /* ShowAlbumsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsModels.swift; sourceTree = "<group>"; };
 		C97B2B8924A97E1D003518A0 /* ShowAlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsViewController.swift; sourceTree = "<group>"; };
 		C97B2B8A24A97E1D003518A0 /* ShowAlbumsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsInteractor.swift; sourceTree = "<group>"; };
+		C97B2B9324A989F3003518A0 /* ShowAlbumsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsViewControllerTests.swift; sourceTree = "<group>"; };
+		C97B2B9424A989F3003518A0 /* ShowAlbumsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsInteractorTests.swift; sourceTree = "<group>"; };
+		C97B2B9524A989F3003518A0 /* ShowAlbumsWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsWorkerTests.swift; sourceTree = "<group>"; };
+		C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +132,7 @@
 		C97B2B6524A96F4E003518A0 /* NikeSampleiOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				C97B2B9124A989C2003518A0 /* UseCases */,
 				C97B2B6624A96F4E003518A0 /* NikeSampleiOSTests.swift */,
 				C97B2B6824A96F4E003518A0 /* Info.plist */,
 			);
@@ -163,6 +172,25 @@
 				C97B2B8824A97E1D003518A0 /* ShowAlbumsModels.swift */,
 				C97B2B8924A97E1D003518A0 /* ShowAlbumsViewController.swift */,
 				C97B2B8A24A97E1D003518A0 /* ShowAlbumsInteractor.swift */,
+			);
+			path = ShowAlbums;
+			sourceTree = "<group>";
+		};
+		C97B2B9124A989C2003518A0 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				C97B2B9224A989CE003518A0 /* ShowAlbums */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		C97B2B9224A989CE003518A0 /* ShowAlbums */ = {
+			isa = PBXGroup;
+			children = (
+				C97B2B9324A989F3003518A0 /* ShowAlbumsViewControllerTests.swift */,
+				C97B2B9424A989F3003518A0 /* ShowAlbumsInteractorTests.swift */,
+				C97B2B9524A989F3003518A0 /* ShowAlbumsWorkerTests.swift */,
+				C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */,
 			);
 			path = ShowAlbums;
 			sourceTree = "<group>";
@@ -334,7 +362,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C97B2B9A24A989F3003518A0 /* ShowAlbumsPresenterTests.swift in Sources */,
+				C97B2B9924A989F3003518A0 /* ShowAlbumsWorkerTests.swift in Sources */,
 				C97B2B6724A96F4E003518A0 /* NikeSampleiOSTests.swift in Sources */,
+				C97B2B9724A989F3003518A0 /* ShowAlbumsViewControllerTests.swift in Sources */,
+				C97B2B9824A989F3003518A0 /* ShowAlbumsInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
