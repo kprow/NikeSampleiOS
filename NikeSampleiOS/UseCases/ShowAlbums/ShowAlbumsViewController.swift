@@ -21,7 +21,11 @@ protocol ShowAlbumsDisplayLogic: class {
 
 /// View Controller to show a list of albums
 class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
+
+    /// Dependency - interactor to start the viper loop with any business logic that must happen in this scene.
     var interactor: ShowAlbumsBusinessLogic?
+
+    /// Dependency - the routing logic  to handle any navigation or presentation of other scenes
     var router: (ShowAlbumsRoutingLogic & ShowAlbumsDataPassing)?
 
     // MARK: Object lifecycle
@@ -38,6 +42,7 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
 
     // MARK: Setup
 
+    /// The setup method is called from any instatiation of this class to create the VIPER architecture for this scene.
     private func setup() {
         let viewController = self
         let interactor = ShowAlbumsInteractor()

@@ -9,6 +9,20 @@
 //    you can apply clean architecture to your iOS and Mac projects,
 //    see http://clean-swift.com
 //
+import Foundation
 
-class ShowAlbumsWorker {
+/// Definition of worker to get data from API(RSS feed) then return a result which includes Albums
+protocol ShowAlbumsWorkerProtocol {
+    /// Fetches data from API then converts results into Albums or passes the generated error.
+    /// - Parameter completionHandler: Result Enum consisting of an array of Albums on success or Error on failure.
+    func fetchFromAPI(_ completionHandler: @escaping (Result<[Album], Error>) -> Void)
+}
+class ShowAlbumsWorker: ShowAlbumsWorkerProtocol {
+
+    /// Dependency - The api to fetch data from
+    var api: ITunesAPIProtocol? = ITunesRSSFeedGenerator()
+
+    func fetchFromAPI(_ completionHandler: @escaping (Result<[Album], Error>) -> Void) {
+        // Call the api.
+    }
 }

@@ -18,8 +18,10 @@ protocol ShowAlbumsDataStore {
 }
 
 class ShowAlbumsInteractor: ShowAlbumsBusinessLogic, ShowAlbumsDataStore {
+    /// Dependency - To pass along entity models to be converted into a presentation(view models) object for the view.
     var presenter: ShowAlbumsPresentationLogic?
-    var worker: ShowAlbumsWorker?
+    /// Dependency - A worker object to handle the calling of the api to fetch data that will become albums
+    var worker: ShowAlbumsWorkerProtocol? = ShowAlbumsWorker()
 
     // MARK: Fetch Albums
 
