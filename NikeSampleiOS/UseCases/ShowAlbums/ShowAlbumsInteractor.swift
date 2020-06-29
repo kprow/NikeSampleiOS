@@ -10,11 +10,18 @@
 //    see http://clean-swift.com
 //
 
+/// Definition of business logic performed in this scene.
 protocol ShowAlbumsBusinessLogic {
+    /// fetch a list of albums from the worker
+    /// - Parameter request: the request object to start the request.
+    ///         Eventually this will be customized for different purposes, ie) region, result limit etc.
     func fetchAlbums(request: ShowAlbums.Fetch.Request)
 }
 
+/// The data associated with this scene, in this case an array of albums.
 protocol ShowAlbumsDataStore {
+    /// The albums that are the data for this scene.
+    var albums: [Album] { get set }
 }
 
 class ShowAlbumsInteractor: ShowAlbumsBusinessLogic, ShowAlbumsDataStore {
@@ -22,6 +29,8 @@ class ShowAlbumsInteractor: ShowAlbumsBusinessLogic, ShowAlbumsDataStore {
     var presenter: ShowAlbumsPresentationLogic?
     /// Dependency - A worker object to handle the calling of the api to fetch data that will become albums
     var worker: ShowAlbumsWorkerProtocol? = ShowAlbumsWorker()
+
+    var albums: [Album] = []
 
     // MARK: Fetch Albums
 
