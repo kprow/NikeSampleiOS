@@ -100,4 +100,18 @@ class ShowAlbumsViewControllerTests: XCTestCase {
         XCTAssertTrue(tableViewSpy.hasReloadDataBeenCalled,
                       "displayAlbums should call reload data on the tableview.")
     }
+    func testNumberOfRowsInSectionReturnsViewModelCount() {
+        // Given
+        loadView()
+        let albumList = [
+            ShowAlbums.Fetch.ViewModel.Album(name: "1", artist: "artist 1"),
+            ShowAlbums.Fetch.ViewModel.Album(name: "2", artist: "artist 2")
+        ]
+        sut.albums = albumList
+        // When
+        let numberOfRows = sut.tableView(sut.tableView, numberOfRowsInSection: 0)
+        // Then
+        XCTAssertEqual(albumList.count, numberOfRows,
+                       "the number of rows in the only section should be the same as the number of albums.")
+    }
 }

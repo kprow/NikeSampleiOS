@@ -80,3 +80,11 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
         tableView.reloadData()
     }
 }
+
+// MARK: - UITableViewDataSource
+
+extension ShowAlbumsViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return albums.count
+    }
+}
