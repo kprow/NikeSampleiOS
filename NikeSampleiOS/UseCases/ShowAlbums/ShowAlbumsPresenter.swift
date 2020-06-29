@@ -10,19 +10,17 @@
 //    see http://clean-swift.com
 //
 
-import UIKit
-
 protocol ShowAlbumsPresentationLogic {
-    func presentSomething(response: ShowAlbums.Something.Response)
+    func presentAlbums(response: ShowAlbums.Fetch.Response)
 }
 
 class ShowAlbumsPresenter: ShowAlbumsPresentationLogic {
     weak var viewController: ShowAlbumsDisplayLogic?
 
-    // MARK: Do something
+    // MARK: Fetch albums
 
-    func presentSomething(response: ShowAlbums.Something.Response) {
-        let viewModel = ShowAlbums.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentAlbums(response: ShowAlbums.Fetch.Response) {
+        let viewModel = ShowAlbums.Fetch.ViewModel()
+        viewController?.displayAlbums(viewModel: viewModel)
     }
 }

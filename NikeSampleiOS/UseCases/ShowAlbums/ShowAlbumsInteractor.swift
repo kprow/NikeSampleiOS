@@ -10,27 +10,21 @@
 //    see http://clean-swift.com
 //
 
-import UIKit
-
 protocol ShowAlbumsBusinessLogic {
-    func doSomething(request: ShowAlbums.Something.Request)
+    func fetchAlbums(request: ShowAlbums.Fetch.Request)
 }
 
 protocol ShowAlbumsDataStore {
-    //var name: String { get set }
 }
 
 class ShowAlbumsInteractor: ShowAlbumsBusinessLogic, ShowAlbumsDataStore {
     var presenter: ShowAlbumsPresentationLogic?
     var worker: ShowAlbumsWorker?
 
-    // MARK: Do something
+    // MARK: Fetch Albums
 
-    func doSomething(request: ShowAlbums.Something.Request) {
-        worker = ShowAlbumsWorker()
-        worker?.doSomeWork()
-
-        let response = ShowAlbums.Something.Response()
-        presenter?.presentSomething(response: response)
+    func fetchAlbums(request: ShowAlbums.Fetch.Request) {
+        let response = ShowAlbums.Fetch.Response()
+        presenter?.presentAlbums(response: response)
     }
 }

@@ -10,13 +10,11 @@
 //    see http://clean-swift.com
 //
 
-import UIKit
-
 // swiftlint:disable nesting
 enum ShowAlbums {
     // MARK: Use cases
 
-    enum Something {
+    enum Fetch {
         struct Request {
         }
         struct Response {

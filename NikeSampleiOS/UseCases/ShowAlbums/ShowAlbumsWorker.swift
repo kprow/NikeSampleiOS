@@ -10,9 +10,5 @@
 //    see http://clean-swift.com
 //
 
-import UIKit
-
 class ShowAlbumsWorker {
-    func doSomeWork() {
-    }
 }

@@ -13,7 +13,7 @@
 import UIKit
 
 protocol ShowAlbumsDisplayLogic: class {
-    func displaySomething(viewModel: ShowAlbums.Something.ViewModel)
+    func displayAlbums(viewModel: ShowAlbums.Fetch.ViewModel)
 }
 
 class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
@@ -51,17 +51,16 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
+        fetchAlbums()
     }
 
-    // MARK: Do something
+    // MARK: Fetch Albums
 
-    func doSomething() {
-        let request = ShowAlbums.Something.Request()
-        interactor?.doSomething(request: request)
+    func fetchAlbums() {
+        let request = ShowAlbums.Fetch.Request()
+        interactor?.fetchAlbums(request: request)
     }
 
-    func displaySomething(viewModel: ShowAlbums.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    func displayAlbums(viewModel: ShowAlbums.Fetch.ViewModel) {
     }
 }

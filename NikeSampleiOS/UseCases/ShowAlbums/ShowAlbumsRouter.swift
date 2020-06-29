@@ -10,17 +10,15 @@
 //    see http://clean-swift.com
 //
 
-import UIKit
-
-@objc protocol ShowAlbumsRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+protocol ShowAlbumsRoutingLogic {
+    //func routeToSomewhere()
 }
 
 protocol ShowAlbumsDataPassing {
     var dataStore: ShowAlbumsDataStore? { get }
 }
 
-class ShowAlbumsRouter: NSObject, ShowAlbumsRoutingLogic, ShowAlbumsDataPassing {
+class ShowAlbumsRouter: ShowAlbumsRoutingLogic, ShowAlbumsDataPassing {
     weak var viewController: ShowAlbumsViewController?
     var dataStore: ShowAlbumsDataStore?
 
