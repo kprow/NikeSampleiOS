@@ -12,15 +12,25 @@
 
 // swiftlint:disable nesting
 enum ShowAlbums {
+
     // MARK: Use cases
 
+    /// Enum to use for the viper loop associated with fetching albums.
     enum Fetch {
+        /// The request object used by the view controller to start the viper loop.
         struct Request {
         }
+        /// The response used by the presenter to turn domain models into view models.
         struct Response {
             let albums: [Album]
         }
+        /// The view model used by the view to display album information.
         struct ViewModel {
+            struct Album {
+                let name: String
+                let artist: String
+            }
+            let albums: [Album]
         }
     }
 }

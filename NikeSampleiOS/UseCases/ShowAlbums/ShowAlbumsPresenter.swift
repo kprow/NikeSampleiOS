@@ -20,7 +20,12 @@ class ShowAlbumsPresenter: ShowAlbumsPresentationLogic {
     // MARK: Fetch albums
 
     func presentAlbums(response: ShowAlbums.Fetch.Response) {
-        let viewModel = ShowAlbums.Fetch.ViewModel()
+        let albumViewModels: [ShowAlbums.Fetch.ViewModel.Album] = response.albums.map {
+            return ShowAlbums.Fetch.ViewModel.Album(
+                name: $0.name ?? Constants.unknownAlbumName,
+                artist: $0.artistName ?? Constants.unknownArtistName)
+        }
+        let viewModel = ShowAlbums.Fetch.ViewModel(albums: albumViewModels)
         viewController?.displayAlbums(viewModel: viewModel)
     }
 }

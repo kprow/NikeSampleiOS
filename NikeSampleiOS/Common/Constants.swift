@@ -10,4 +10,6 @@ import Foundation
 
 class Constants {
     static let showAlbmusVCTitle = "Top Albums"
+    static let unknownAlbumName = "Unknown Album"
+    static let unknownArtistName = "Unknown Artist"
 }
