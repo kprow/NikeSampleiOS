@@ -43,4 +43,24 @@ class ModelsCreationTests: XCTestCase {
         XCTAssertNotNil(album?.copyright, "Creating an album from json should succeed with a valid copyright string.")
         XCTAssertNotNil(album?.url, "Creating an album from json should succeed with a valid url string.")
     }
+    func testITunesRssResultsCreatedWithJson() {
+        // Given
+        let resultsJSON =
+"""
+{
+    "results": [
+        \(JsonForTests.albumJson)
+    ]
+}
+"""
+        // When
+        let rssResults = try? JSONDecoder().decode(
+            ITunesRssResults.self,
+            from: resultsJSON.data(using: .utf8) ?? Data())
+        // Then
+        XCTAssertNotNil(rssResults, "Creating album results from json should succeed.")
+        XCTAssertNotNil(rssResults?.results, "Creating album results from json should succeed with albums.")
+        XCTAssertNotNil(rssResults?.results?.first,
+                        "Creating album results from json should succeed with non empty albums.")
+    }
 }
