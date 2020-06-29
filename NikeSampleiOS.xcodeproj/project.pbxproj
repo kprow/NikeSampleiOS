@@ -15,6 +15,7 @@
 		C97B2B5C24A96F4D003518A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C97B2B5A24A96F4D003518A0 /* LaunchScreen.storyboard */; };
 		C97B2B6724A96F4E003518A0 /* NikeSampleiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B6624A96F4E003518A0 /* NikeSampleiOSTests.swift */; };
 		C97B2B7224A96F4E003518A0 /* NikeSampleiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B7124A96F4E003518A0 /* NikeSampleiOSUITests.swift */; };
+		C97B2B8224A970B0003518A0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C97B2B8124A970B0003518A0 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C97B2B6D24A96F4E003518A0 /* NikeSampleiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NikeSampleiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97B2B7124A96F4E003518A0 /* NikeSampleiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NikeSampleiOSUITests.swift; sourceTree = "<group>"; };
 		C97B2B7324A96F4E003518A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C97B2B8124A970B0003518A0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		C97B2B4324A96F4D003518A0 = {
 			isa = PBXGroup;
 			children = (
+				C97B2B8124A970B0003518A0 /* .gitignore */,
 				C97B2B4E24A96F4D003518A0 /* NikeSampleiOS */,
 				C97B2B6524A96F4E003518A0 /* NikeSampleiOSTests */,
 				C97B2B7024A96F4E003518A0 /* NikeSampleiOSUITests */,
@@ -99,6 +102,8 @@
 		C97B2B4E24A96F4D003518A0 /* NikeSampleiOS */ = {
 			isa = PBXGroup;
 			children = (
+				C97B2B8024A96F74003518A0 /* UseCases */,
+				C97B2B7F24A96F61003518A0 /* Common */,
 				C97B2B4F24A96F4D003518A0 /* AppDelegate.swift */,
 				C97B2B5124A96F4D003518A0 /* SceneDelegate.swift */,
 				C97B2B5324A96F4D003518A0 /* ViewController.swift */,
@@ -128,6 +133,20 @@
 			path = NikeSampleiOSUITests;
 			sourceTree = "<group>";
 		};
+		C97B2B7F24A96F61003518A0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C97B2B8024A96F74003518A0 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +157,7 @@
 				C97B2B4824A96F4D003518A0 /* Sources */,
 				C97B2B4924A96F4D003518A0 /* Frameworks */,
 				C97B2B4A24A96F4D003518A0 /* Resources */,
+				C97B2B8324A97BF9003518A0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -232,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C97B2B8224A970B0003518A0 /* .gitignore in Resources */,
 				C97B2B5C24A96F4D003518A0 /* LaunchScreen.storyboard in Resources */,
 				C97B2B5924A96F4D003518A0 /* Assets.xcassets in Resources */,
 				C97B2B5724A96F4D003518A0 /* Main.storyboard in Resources */,
@@ -253,6 +274,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C97B2B8324A97BF9003518A0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C97B2B4824A96F4D003518A0 /* Sources */ = {
