@@ -44,16 +44,31 @@ class ShowAlbumsViewControllerTests: XCTestCase {
     }
 
     // MARK: Test doubles
+    class ShowAlbumsInteractorSpy: ShowAlbumsBusinessLogic {
+        var hasFetchAlbumsBeenCalled = false
+        func fetchAlbums(request: ShowAlbums.Fetch.Request) {
+            hasFetchAlbumsBeenCalled = true
+        }
+    }
 
     // MARK: Tests
     func testViewDidLoadSetsTitle() {
         // Given
-        loadView()
         let expectedTitle = Constants.showAlbmusVCTitle
         // When
-        sut.viewDidLoad()
+        loadView()
         // Then
         XCTAssertEqual(expectedTitle, sut.title,
                        "The title of the \(expectedTitle) should be set in viewDidLoad")
+    }
+    func testViewDidLoadCallsFetchAlbums() {
+        // Given
+        let interactorSpy = ShowAlbumsInteractorSpy()
+        sut.interactor = interactorSpy
+        // When
+        sut.viewDidLoad()
+        // Then
+        XCTAssertTrue(interactorSpy.hasFetchAlbumsBeenCalled,
+                      "When viewDidLoad is called we should fetchAlbums.")
     }
 }
