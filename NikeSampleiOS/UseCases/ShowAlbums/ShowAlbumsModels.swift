@@ -18,6 +18,7 @@ enum ShowAlbums {
         struct Request {
         }
         struct Response {
+            let albums: [Album]
         }
         struct ViewModel {
         }

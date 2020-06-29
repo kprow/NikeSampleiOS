@@ -46,6 +46,14 @@ class ShowAlbumsInteractorTests: XCTestCase {
             }
         }
     }
+    class PresenterSpy: ShowAlbumsPresentationLogic {
+        var hasPresentAlbumsBeenCalled = false
+        var observePresentAlbumsResponse: ShowAlbums.Fetch.Response?
+        func presentAlbums(response: ShowAlbums.Fetch.Response) {
+            hasPresentAlbumsBeenCalled = true
+            observePresentAlbumsResponse = response
+        }
+    }
 
     // MARK: Tests
 
@@ -58,5 +66,18 @@ class ShowAlbumsInteractorTests: XCTestCase {
         // Then
         XCTAssertTrue(workerSpy.hasFetchFromAPIBeenCalled,
                       "When we call fetchAlbums on the interactor it should delegate to the worker.")
+    }
+    func testFetchAlbumsWithSuccessCallsPresentAlbums() {
+        // Given
+        let workerSpy = WorkerSpy()
+        workerSpy.injectableFetchFromAPIResult = .success([])
+        sut.worker = workerSpy
+        let presenterSpy = PresenterSpy()
+        sut.presenter = presenterSpy
+        // When
+        sut.fetchAlbums(request: ShowAlbums.Fetch.Request())
+        // Then
+        XCTAssertTrue(presenterSpy.hasPresentAlbumsBeenCalled,
+                      "When we call fetchAlbums and we get a successful response we should call presentAlbums")
     }
 }
