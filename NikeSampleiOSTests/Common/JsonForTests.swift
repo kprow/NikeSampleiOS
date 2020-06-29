@@ -46,4 +46,14 @@ struct JsonForTests {
   "url": "https://itunes.apple.com/us/genre/id20"
 }
 """
+    static let feedJSON =
+"""
+{
+    "title": "Top Albums",
+    "results": [
+        \(JsonForTests.albumJson)
+    ]
+}
+"""
+    static let rssJSON = "{ \"feed\": \(JsonForTests.feedJSON) }"
 }

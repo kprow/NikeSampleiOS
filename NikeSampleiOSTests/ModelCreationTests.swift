@@ -43,18 +43,9 @@ class ModelsCreationTests: XCTestCase {
         XCTAssertNotNil(album?.copyright, "Creating an album from json should succeed with a valid copyright string.")
         XCTAssertNotNil(album?.url, "Creating an album from json should succeed with a valid url string.")
     }
-    static let feedJSON =
-"""
-{
-    "title": "Top Albums",
-    "results": [
-        \(JsonForTests.albumJson)
-    ]
-}
-"""
     func testITunesRssFeedCreatedWithJson() {
         // Given
-        let feedData = ModelsCreationTests.feedJSON.data(using: .utf8) ?? Data()
+        let feedData = JsonForTests.feedJSON.data(using: .utf8) ?? Data()
         // When
         let feed = try? JSONDecoder().decode(ITunesRssFeed.self, from: feedData)
         // Then
@@ -66,8 +57,7 @@ class ModelsCreationTests: XCTestCase {
     }
     func testITunesRssCreatedWithJson() {
         // Given
-        let rssJSON = "{ \"feed\": \(ModelsCreationTests.feedJSON) }"
-        let rssData = rssJSON.data(using: .utf8) ?? Data()
+        let rssData = JsonForTests.rssJSON.data(using: .utf8) ?? Data()
         // When
         let rss = try? JSONDecoder().decode(ITunesRss.self, from: rssData)
         // Then
