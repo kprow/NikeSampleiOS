@@ -24,6 +24,7 @@
 		C97B2B9824A989F3003518A0 /* ShowAlbumsInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9424A989F3003518A0 /* ShowAlbumsInteractorTests.swift */; };
 		C97B2B9924A989F3003518A0 /* ShowAlbumsWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9524A989F3003518A0 /* ShowAlbumsWorkerTests.swift */; };
 		C97B2B9A24A989F3003518A0 /* ShowAlbumsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */; };
+		C97B2B9C24A98B1B003518A0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B9B24A98B1B003518A0 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		C97B2B9424A989F3003518A0 /* ShowAlbumsInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsInteractorTests.swift; sourceTree = "<group>"; };
 		C97B2B9524A989F3003518A0 /* ShowAlbumsWorkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsWorkerTests.swift; sourceTree = "<group>"; };
 		C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsPresenterTests.swift; sourceTree = "<group>"; };
+		C97B2B9B24A98B1B003518A0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		C97B2B7F24A96F61003518A0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C97B2B9B24A98B1B003518A0 /* Constants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				C97B2B8F24A97E1D003518A0 /* ShowAlbumsViewController.swift in Sources */,
 				C97B2B8E24A97E1D003518A0 /* ShowAlbumsModels.swift in Sources */,
 				C97B2B9024A97E1D003518A0 /* ShowAlbumsInteractor.swift in Sources */,
+				C97B2B9C24A98B1B003518A0 /* Constants.swift in Sources */,
 				C97B2B8C24A97E1D003518A0 /* ShowAlbumsWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

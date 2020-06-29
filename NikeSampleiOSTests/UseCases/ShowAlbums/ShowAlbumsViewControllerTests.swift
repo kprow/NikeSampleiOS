@@ -46,4 +46,14 @@ class ShowAlbumsViewControllerTests: XCTestCase {
     // MARK: Test doubles
 
     // MARK: Tests
+    func testViewDidLoadSetsTitle() {
+        // Given
+        loadView()
+        let expectedTitle = Constants.showAlbmusVCTitle
+        // When
+        sut.viewDidLoad()
+        // Then
+        XCTAssertEqual(expectedTitle, sut.title,
+                       "The title of the \(expectedTitle) should be set in viewDidLoad")
+    }
 }

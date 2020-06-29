@@ -51,6 +51,7 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = Constants.showAlbmusVCTitle
         fetchAlbums()
     }
 
