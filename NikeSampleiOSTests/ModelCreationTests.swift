@@ -43,24 +43,35 @@ class ModelsCreationTests: XCTestCase {
         XCTAssertNotNil(album?.copyright, "Creating an album from json should succeed with a valid copyright string.")
         XCTAssertNotNil(album?.url, "Creating an album from json should succeed with a valid url string.")
     }
-    func testITunesRssResultsCreatedWithJson() {
-        // Given
-        let resultsJSON =
+    static let feedJSON =
 """
 {
+    "title": "Top Albums",
     "results": [
         \(JsonForTests.albumJson)
     ]
 }
 """
+    func testITunesRssFeedCreatedWithJson() {
+        // Given
+        let feedData = ModelsCreationTests.feedJSON.data(using: .utf8) ?? Data()
         // When
-        let rssResults = try? JSONDecoder().decode(
-            ITunesRssResults.self,
-            from: resultsJSON.data(using: .utf8) ?? Data())
+        let feed = try? JSONDecoder().decode(ITunesRssFeed.self, from: feedData)
         // Then
-        XCTAssertNotNil(rssResults, "Creating album results from json should succeed.")
-        XCTAssertNotNil(rssResults?.results, "Creating album results from json should succeed with albums.")
-        XCTAssertNotNil(rssResults?.results?.first,
-                        "Creating album results from json should succeed with non empty albums.")
+        XCTAssertNotNil(feed, "Creating feed from json should succeed.")
+        XCTAssertNotNil(feed?.results, "Creating feed json should succeed with results.")
+        XCTAssertNotNil(feed?.results, "Creating feed results from json should succeed with albums.")
+        XCTAssertNotNil(feed?.results?.first,
+                        "Creating feed results from json should succeed with non empty albums.")
+    }
+    func testITunesRssCreatedWithJson() {
+        // Given
+        let rssJSON = "{ \"feed\": \(ModelsCreationTests.feedJSON) }"
+        let rssData = rssJSON.data(using: .utf8) ?? Data()
+        // When
+        let rss = try? JSONDecoder().decode(ITunesRss.self, from: rssData)
+        // Then
+        XCTAssertNotNil(rss, "Creating rss from json should succeed.")
+        XCTAssertNotNil(rss?.feed, "Creating rss feed from json should succeed.")
     }
 }

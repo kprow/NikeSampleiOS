@@ -8,13 +8,13 @@
 
 import Foundation
 
+/// The model used to parse the json as it's given by the iTunes RSS Feed Generator
+struct ITunesRss: Codable {
+    let feed: ITunesRssFeed?
+}
+
 /// The model used for feed json returned by the iTunes RSS Feed Generator
 struct ITunesRssFeed: Codable {
     let title: String?
-    let results: ITunesRssResults?
-}
-
-/// The model used for results returned by the iTunes RSS feed 'results' attribute.
-struct ITunesRssResults: Codable {
     let results: [Album]?
 }
