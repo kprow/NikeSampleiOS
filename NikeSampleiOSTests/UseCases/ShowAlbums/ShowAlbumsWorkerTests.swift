@@ -37,6 +37,26 @@ class ShowAlbumsWorkerTests: XCTestCase {
 
     // MARK: Test doubles
 
+    class ApiSpy: ITunesAPIProtocol {
+        var hasFetchDataBeenCalled = false
+        func fetchData(_ completionHandler: @escaping (Data?, Error?) -> Void) {
+            hasFetchDataBeenCalled = true
+        }
+    }
+
     // MARK: Tests
+
+    func testFetchFromApiCallsFetchData() {
+        // Given
+        let apiSpy = ApiSpy()
+        sut.api = apiSpy
+        // When
+        sut.fetchFromAPI { (_) in
+            // do nothing
+        }
+        // Then
+        XCTAssertTrue(apiSpy.hasFetchDataBeenCalled,
+                      "fetchFromAPI should call fetchData on the api.")
+    }
 
 }
