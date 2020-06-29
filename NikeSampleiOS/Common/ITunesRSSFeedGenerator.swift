@@ -27,8 +27,9 @@ struct ITunesRSSFeedGenerator: ITunesAPIProtocol {
     func fetchData(_ completionHandler: @escaping (Data?, Error?) -> Void) {
         if let url = URL(string: baseURL) {
             let request = URLRequest(url: url)
-            session.dataTask(with: request) { (data, response, error) in
-            }
+            session.dataTask(with: request) { (data, _, error) in
+            
+            }.resume()
         }
     }
 }

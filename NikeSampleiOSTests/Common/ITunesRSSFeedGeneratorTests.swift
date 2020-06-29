@@ -50,5 +50,18 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
         XCTAssertTrue(sessionSpy.hasDataTaskBeenCalled,
                       "When we call fetchData we should use the dataTask from URLSession.")
     }
-
+    func testFetchDataCallsResumeOnDataTask() {
+        // Given
+        let dataTaskSpy = URLSessionDataTaskSpy()
+        let sessionMock = URLSessionSpy()
+        sessionMock.injectableDataTaskReturn = dataTaskSpy
+        sut.session = sessionMock
+        // When
+        sut.fetchData({ _, _ in
+            // do nothing
+        })
+        // Then
+        XCTAssertTrue(dataTaskSpy.hasResumeBeenCalled,
+                      "After creating the dataTask in fetchData, we should call resume.")
+    }
 }
