@@ -26,9 +26,13 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
     class URLSessionSpy: URLSessionProtocol {
         var hasDataTaskBeenCalled = false
         var injectableDataTaskReturn = URLSessionDataTaskSpy()
+        var injectableDataTaskData: Data?
+        var injectableDataTaskResponse: URLResponse?
+        var injectableDataTaskError: Error?
         func dataTask(with request: URLRequest,
                       completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {
             hasDataTaskBeenCalled = true
+            completionHandler(injectableDataTaskData, injectableDataTaskResponse, injectableDataTaskError)
             return injectableDataTaskReturn
         }
     }
@@ -63,5 +67,23 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
         // Then
         XCTAssertTrue(dataTaskSpy.hasResumeBeenCalled,
                       "After creating the dataTask in fetchData, we should call resume.")
+    }
+    func testFetchDataWithErrorCallsCompletionHandlerWithError() {
+        // Given
+        let sessionMock = URLSessionSpy()
+        sessionMock.injectableDataTaskError = NSError(domain: "", code: 0, userInfo: nil)
+        sut.session = sessionMock
+        let completionExpectation = expectation(description: "fetchData should call completionHandler.")
+        // When
+        sut.fetchData { (_, error) in
+            // Then
+            XCTAssertNotNil(error)
+            completionExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
     }
 }
