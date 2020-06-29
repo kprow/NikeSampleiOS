@@ -113,4 +113,55 @@ class ShowAlbumsWorkerTests: XCTestCase {
             }
         }
     }
+    func testFetchFromApiWithNoResultsFails() {
+        // Given
+        let apiSpy = ApiSpy()
+        let givenNoResultsData = "{}".data(using: .utf8) ?? Data()
+        apiSpy.injectableFetchDataResult = .success(givenNoResultsData)
+        sut.api = apiSpy
+        let fetchFromApiExpectation = expectation(description: "After the api calls the completion handler.")
+        // When
+        sut.fetchFromAPI { (result) in
+            // Then
+            switch result {
+            case .success:
+                XCTFail("We should not have success if the data contains no results.")
+            case .failure(let error):
+                XCTAssertTrue(error is ShowAlbumsWorker.ApiError,
+                "The error on failure should be an ApiError")
+                XCTAssertEqual(.noResults, error as? ShowAlbumsWorker.ApiError)
+            }
+            fetchFromApiExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
+    func testFetchFromApiSuccess() {
+        // Given
+        let apiSpy = ApiSpy()
+        let givenResultsData = JsonForTests.rssJSON.data(using: .utf8) ?? Data()
+        apiSpy.injectableFetchDataResult = .success(givenResultsData)
+        sut.api = apiSpy
+        let fetchFromApiExpectation = expectation(description: "After the api calls the completion handler.")
+        // When
+        sut.fetchFromAPI { (result) in
+            // Then
+            switch result {
+            case .success(let albums):
+                XCTAssertFalse(albums.isEmpty,
+                               "fetchFromAPI with data containing results should return a non empty array of albums.")
+            case .failure:
+                XCTFail("We should not have failure if the data contains results.")
+            }
+            fetchFromApiExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
 }

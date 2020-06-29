@@ -32,7 +32,11 @@ class ShowAlbumsWorker: ShowAlbumsWorkerProtocol {
                     completionHandler(.failure(ApiError.unableToParse))
                     return
                 }
-                print( rss )
+                guard let albums = rss.feed?.results else {
+                    completionHandler(.failure(ApiError.noResults))
+                    return
+                }
+                completionHandler(.success(albums))
             }
         })
     }
@@ -40,5 +44,6 @@ class ShowAlbumsWorker: ShowAlbumsWorkerProtocol {
 extension ShowAlbumsWorker {
     enum ApiError: Error {
         case unableToParse
+        case noResults
     }
 }
