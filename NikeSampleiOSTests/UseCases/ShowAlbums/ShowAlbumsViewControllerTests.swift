@@ -44,6 +44,7 @@ class ShowAlbumsViewControllerTests: XCTestCase {
     }
 
     // MARK: Test doubles
+
     class ShowAlbumsInteractorSpy: ShowAlbumsBusinessLogic {
         var hasFetchAlbumsBeenCalled = false
         func fetchAlbums(request: ShowAlbums.Fetch.Request) {

@@ -12,10 +12,14 @@
 
 import UIKit
 
+/// The display logic called by the presenter to displayAlbums
 protocol ShowAlbumsDisplayLogic: class {
+    /// Sets the view models locally to be displayed by the View Controller
+    /// - Parameter viewModel: an array of albums with Name, Artist, and Album Artwork
     func displayAlbums(viewModel: ShowAlbums.Fetch.ViewModel)
 }
 
+/// View Controller to show a list of albums
 class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
     var interactor: ShowAlbumsBusinessLogic?
     var router: (ShowAlbumsRoutingLogic & ShowAlbumsDataPassing)?
@@ -57,6 +61,7 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
 
     // MARK: Fetch Albums
 
+    /// Method to start the viper loop to fetch top albums
     func fetchAlbums() {
         let request = ShowAlbums.Fetch.Request()
         interactor?.fetchAlbums(request: request)

@@ -7,6 +7,7 @@
 //
 import Foundation
 
+/// Defines the methods we use out of the usual dataTask, so it can be injectable where needed.
 protocol URLSessionDataTaskProtocol {
     func resume()
 }

@@ -8,8 +8,27 @@
 
 import Foundation
 
-struct ITunesRSSFeedGenerator {
+/// Definition of how we make requests agains the iTunes API
+protocol ITunesAPIProtocol {
+    func fetchData(_ completionHandler: @escaping (Data?, Error?) -> Void)
+}
+
+/// Implementation of iTunes API
+struct ITunesRSSFeedGenerator: ITunesAPIProtocol {
+
+    private let baseURL =
+    "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/10/explicit.json"
+
     /// Dependency - the session used to perform dataTasks(requests)
     var session: URLSessionProtocol = URLSession.shared
-    private init() {}
+
+    init() {}
+
+    func fetchData(_ completionHandler: @escaping (Data?, Error?) -> Void) {
+        if let url = URL(string: baseURL) {
+            let request = URLRequest(url: url)
+            session.dataTask(with: request) { (data, response, error) in
+            }
+        }
+    }
 }

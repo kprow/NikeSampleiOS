@@ -32,6 +32,7 @@
 		C97B2BA924A9ADE0003518A0 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BA824A9ADE0003518A0 /* URLSessionProtocol.swift */; };
 		C97B2BAB24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BAA24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift */; };
 		C97B2BAE24A9AEB0003518A0 /* JsonForTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BAD24A9AEB0003518A0 /* JsonForTests.swift */; };
+		C97B2BB024A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		C97B2BA824A9ADE0003518A0 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		C97B2BAA24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskProtocol.swift; sourceTree = "<group>"; };
 		C97B2BAD24A9AEB0003518A0 /* JsonForTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonForTests.swift; sourceTree = "<group>"; };
+		C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesRSSFeedGeneratorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				C97B2BAD24A9AEB0003518A0 /* JsonForTests.swift */,
+				C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				C97B2B6724A96F4E003518A0 /* NikeSampleiOSTests.swift in Sources */,
 				C97B2B9724A989F3003518A0 /* ShowAlbumsViewControllerTests.swift in Sources */,
 				C97B2B9824A989F3003518A0 /* ShowAlbumsInteractorTests.swift in Sources */,
+				C97B2BB024A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift in Sources */,
 				C97B2BAE24A9AEB0003518A0 /* JsonForTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
