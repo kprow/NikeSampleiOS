@@ -71,12 +71,39 @@ class ShowAlbumsWorkerTests: XCTestCase {
         let fetchFromApiExpectation = expectation(description: "After the api calls the completion handler.")
         // When
         sut.fetchFromAPI { (result) in
+            // Then
             switch result {
             case .success:
                 XCTFail("We should not have success if an error occured")
             case .failure(let error):
                 XCTAssertEqual(givenError, error as? ITunesRSSFeedGenerator.FeedError,
                 "The given error should be returned in the failure.")
+            }
+            fetchFromApiExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
+    func testFetchFromApiWithBadJsonResultsInFailure() {
+        // Given
+        let apiSpy = ApiSpy()
+        let givenBadData = "{{}".data(using: .utf8) ?? Data()
+        apiSpy.injectableFetchDataResult = .success(givenBadData)
+        sut.api = apiSpy
+        let fetchFromApiExpectation = expectation(description: "After the api calls the completion handler.")
+        // When
+        sut.fetchFromAPI { (result) in
+            // Then
+            switch result {
+            case .success:
+                XCTFail("We should not have success if the data is not in the correct format.")
+            case .failure(let error):
+                XCTAssertTrue(error is ShowAlbumsWorker.ApiError,
+                "The error on failure should be an ApiError")
+                XCTAssertEqual(.unableToParse, error as? ShowAlbumsWorker.ApiError)
             }
             fetchFromApiExpectation.fulfill()
         }

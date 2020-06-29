@@ -28,8 +28,17 @@ class ShowAlbumsWorker: ShowAlbumsWorkerProtocol {
             case .failure(let error):
                 completionHandler(.failure(error))
             case .success(let data):
-                print(data)
+                guard let rss = try? JSONDecoder().decode(ITunesRss.self, from: data) else {
+                    completionHandler(.failure(ApiError.unableToParse))
+                    return
+                }
+                print( rss )
             }
         })
+    }
+}
+extension ShowAlbumsWorker {
+    enum ApiError: Error {
+        case unableToParse
     }
 }
