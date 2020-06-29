@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A Genre entity model consisting of an id, name and url string.
 struct Genre: Equatable, Codable {
     let genreId: String?
     let name: String?
