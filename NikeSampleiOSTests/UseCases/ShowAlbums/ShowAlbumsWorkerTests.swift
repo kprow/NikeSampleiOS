@@ -39,8 +39,12 @@ class ShowAlbumsWorkerTests: XCTestCase {
 
     class ApiSpy: ITunesAPIProtocol {
         var hasFetchDataBeenCalled = false
-        func fetchData(_ completionHandler: @escaping (Data?, Error?) -> Void) {
+        var injectableFetchDataResult: Result<Data, Error>?
+        func fetchData(_ completionHandler: @escaping (Result<Data, Error>) -> Void) {
             hasFetchDataBeenCalled = true
+            if let result = injectableFetchDataResult {
+                completionHandler(result)
+            }
         }
     }
 
@@ -58,5 +62,28 @@ class ShowAlbumsWorkerTests: XCTestCase {
         XCTAssertTrue(apiSpy.hasFetchDataBeenCalled,
                       "fetchFromAPI should call fetchData on the api.")
     }
-
+    func testFetchFromApiWithErrorFromApiResultsInFailure() {
+        // Given
+        let apiSpy = ApiSpy()
+        let givenError = ITunesRSSFeedGenerator.FeedError.noData
+        apiSpy.injectableFetchDataResult = .failure(givenError)
+        sut.api = apiSpy
+        let fetchFromApiExpectation = expectation(description: "After the api calls the completion handler.")
+        // When
+        sut.fetchFromAPI { (result) in
+            switch result {
+            case .success:
+                XCTFail("We should not have success if an error occured")
+            case .failure(let error):
+                XCTAssertEqual(givenError, error as? ITunesRSSFeedGenerator.FeedError,
+                "The given error should be returned in the failure.")
+            }
+            fetchFromApiExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
 }

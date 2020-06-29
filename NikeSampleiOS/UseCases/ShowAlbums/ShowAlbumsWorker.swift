@@ -23,8 +23,13 @@ class ShowAlbumsWorker: ShowAlbumsWorkerProtocol {
     var api: ITunesAPIProtocol? = ITunesRSSFeedGenerator()
 
     func fetchFromAPI(_ completionHandler: @escaping (Result<[Album], Error>) -> Void) {
-        api?.fetchData({ (data, error) in
-            //
+        api?.fetchData({ (result) in
+            switch result {
+            case .failure(let error):
+                completionHandler(.failure(error))
+            case .success(let data):
+                print(data)
+            }
         })
     }
 }
