@@ -51,6 +51,12 @@ class ShowAlbumsViewControllerTests: XCTestCase {
             hasFetchAlbumsBeenCalled = true
         }
     }
+    class UITableViewSpy: UITableView {
+        var hasReloadDataBeenCalled = false
+        override func reloadData() {
+            hasReloadDataBeenCalled = true
+        }
+    }
 
     // MARK: Tests
     func testViewDidLoadSetsTitle() {
@@ -71,5 +77,27 @@ class ShowAlbumsViewControllerTests: XCTestCase {
         // Then
         XCTAssertTrue(interactorSpy.hasFetchAlbumsBeenCalled,
                       "When viewDidLoad is called we should fetchAlbums.")
+    }
+    func testDisplayAlbumsSetsAlbumsUpForDisplay() {
+        // Given
+        let albumVM = ShowAlbums.Fetch.ViewModel.Album(name: "Name", artist: "Artist")
+        let viewModel = ShowAlbums.Fetch.ViewModel(albums: [albumVM])
+        // When
+        sut.displayAlbums(viewModel: viewModel)
+        // Then
+        XCTAssertEqual(albumVM.name, sut.albums.first?.name,
+                       "The displayAlbums method should set up the albums array in the vc.")
+        XCTAssertEqual(albumVM.artist, sut.albums.first?.artist,
+                       "The displayAlbums method should set up the albums array in the vc.")
+    }
+    func testDisplayAlbumsCallsReloadData() {
+        // Given
+        let tableViewSpy = UITableViewSpy()
+        sut.tableView = tableViewSpy
+        // When
+        sut.displayAlbums(viewModel: ShowAlbums.Fetch.ViewModel(albums: []))
+        // Then
+        XCTAssertTrue(tableViewSpy.hasReloadDataBeenCalled,
+                      "displayAlbums should call reload data on the tableview.")
     }
 }

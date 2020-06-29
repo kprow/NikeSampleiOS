@@ -66,6 +66,9 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
 
     // MARK: Fetch Albums
 
+    /// The albums to display in the table view.
+    var albums: [ShowAlbums.Fetch.ViewModel.Album] = []
+
     /// Method to start the viper loop to fetch top albums
     func fetchAlbums() {
         let request = ShowAlbums.Fetch.Request()
@@ -73,5 +76,7 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
     }
 
     func displayAlbums(viewModel: ShowAlbums.Fetch.ViewModel) {
+        albums = viewModel.albums
+        tableView.reloadData()
     }
 }
