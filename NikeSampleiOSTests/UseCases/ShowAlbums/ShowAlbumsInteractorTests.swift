@@ -36,7 +36,27 @@ class ShowAlbumsInteractorTests: XCTestCase {
     }
 
     // MARK: Test doubles
+    class WorkerSpy: ShowAlbumsWorkerProtocol {
+        var hasFetchFromAPIBeenCalled = false
+        var injectableFetchFromAPIResult: Result<[Album], Error>?
+        func fetchFromAPI(_ completionHandler: @escaping (Result<[Album], Error>) -> Void) {
+            hasFetchFromAPIBeenCalled = true
+            if let result = injectableFetchFromAPIResult {
+                completionHandler(result)
+            }
+        }
+    }
 
     // MARK: Tests
 
+    func testFetchAlbumsCallsFetchFromAPI() {
+        // Given
+        let workerSpy = WorkerSpy()
+        sut.worker = workerSpy
+        // When
+        sut.fetchAlbums(request: ShowAlbums.Fetch.Request())
+        // Then
+        XCTAssertTrue(workerSpy.hasFetchFromAPIBeenCalled,
+                      "When we call fetchAlbums on the interactor it should delegate to the worker.")
+    }
 }

@@ -35,6 +35,9 @@ class ShowAlbumsInteractor: ShowAlbumsBusinessLogic, ShowAlbumsDataStore {
     // MARK: Fetch Albums
 
     func fetchAlbums(request: ShowAlbums.Fetch.Request) {
+        worker?.fetchFromAPI({ (result) in
+            print(result)
+        })
         let response = ShowAlbums.Fetch.Response()
         presenter?.presentAlbums(response: response)
     }
