@@ -61,6 +61,7 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = Constants.showAlbmusVCTitle
+        tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: AlbumTableViewCell.reuseIdentifier)
         fetchAlbums()
     }
 
@@ -86,5 +87,12 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
 extension ShowAlbumsViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return albums.count
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableViewCell.reuseIdentifier, for: indexPath)
+        let currentAlbum = albums[indexPath.row]
+        cell.textLabel?.text = currentAlbum.name
+        cell.detailTextLabel?.text = currentAlbum.artist
+        return cell
     }
 }

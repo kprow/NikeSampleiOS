@@ -56,6 +56,21 @@ class ShowAlbumsViewControllerTests: XCTestCase {
         override func reloadData() {
             hasReloadDataBeenCalled = true
         }
+        var hasRegisterBeenCalled = false
+        var observerRegisterCellReuseId: String?
+        override func register(_ cellClass: AnyClass?, forCellReuseIdentifier identifier: String) {
+            hasRegisterBeenCalled = true
+            observerRegisterCellReuseId = identifier
+        }
+        var hasDequeueBeenCalled = false
+        var observeDequeuIdentifier: String?
+        var injectableDequeueTableViewCellReturn = UITableViewCell()
+        override func dequeueReusableCell(withIdentifier identifier: String,
+                                          for indexPath: IndexPath) -> UITableViewCell {
+            hasDequeueBeenCalled = true
+            observeDequeuIdentifier = identifier
+            return injectableDequeueTableViewCellReturn
+        }
     }
 
     // MARK: Tests
@@ -113,5 +128,42 @@ class ShowAlbumsViewControllerTests: XCTestCase {
         // Then
         XCTAssertEqual(albumList.count, numberOfRows,
                        "the number of rows in the only section should be the same as the number of albums.")
+    }
+    func testRegisterIsCalledOnTableViewInViewDidLoad() {
+        // Given
+        let tableViewSpy = UITableViewSpy()
+        sut.tableView = tableViewSpy
+        // When
+        sut.viewDidLoad()
+        // Then
+        XCTAssertTrue(tableViewSpy.hasRegisterBeenCalled, "We should register the tableview in viewDidLoad")
+        XCTAssertEqual(AlbumTableViewCell.reuseIdentifier, tableViewSpy.observerRegisterCellReuseId,
+                       "The tableView cell should be registered with the given reuse identifier.")
+    }
+    func testCellForRowAtCallsDequeue() {
+        // Given
+        let tableViewSpy = UITableViewSpy()
+        sut.tableView = tableViewSpy
+        sut.albums = [ShowAlbums.Fetch.ViewModel.Album(name: "album", artist: "artist")]
+        // When
+        _ = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 0, section: 0))
+        // Then
+        XCTAssertTrue(tableViewSpy.hasDequeueBeenCalled,
+                      "We should dequeue a table view cell in cell for row at for better memory management.")
+        XCTAssertEqual(AlbumTableViewCell.reuseIdentifier, tableViewSpy.observeDequeuIdentifier,
+                       "We should dequeu a table view cell with the given identifer for reuse.")
+    }
+    func testCellForRowAtSetsTextLabelWithAlbumName() {
+        // Given
+        let givenName = "Album"
+        let givenArtist = "Artist"
+        sut.albums = [ShowAlbums.Fetch.ViewModel.Album(name: givenName, artist: givenArtist)]
+        // When
+        let observedCell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 0, section: 0))
+        // Then
+        XCTAssertEqual(givenName, observedCell.textLabel?.text,
+                       "We should set the textLabel to be the the given album name.")
+        XCTAssertEqual(givenArtist, observedCell.detailTextLabel?.text,
+                       "We should set the detail text labe to be the the given artist name.")
     }
 }
