@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let mainVC = ViewController()
+        let mainVC = ShowAlbumsViewController(style: .plain)
         let navVC = UINavigationController(rootViewController: mainVC)
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()

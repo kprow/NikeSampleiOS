@@ -18,12 +18,12 @@ protocol ShowAlbumsDisplayLogic: class {
 
 class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
     var interactor: ShowAlbumsBusinessLogic?
-    var router: (NSObjectProtocol & ShowAlbumsRoutingLogic & ShowAlbumsDataPassing)?
+    var router: (ShowAlbumsRoutingLogic & ShowAlbumsDataPassing)?
 
     // MARK: Object lifecycle
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    override init(style: UITableView.Style) {
+        super.init(style: style)
         setup()
     }
 
@@ -47,17 +47,6 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
         router.dataStore = interactor
     }
 
-    // MARK: Routing
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-
     // MARK: View lifecycle
 
     override func viewDidLoad() {
@@ -66,8 +55,6 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
     }
 
     // MARK: Do something
-
-    //@IBOutlet weak var nameTextField: UITextField!
 
     func doSomething() {
         let request = ShowAlbums.Something.Request()
