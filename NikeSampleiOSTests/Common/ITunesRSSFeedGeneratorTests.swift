@@ -47,7 +47,7 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
         let sessionSpy = URLSessionSpy()
         sut.session = sessionSpy
         // When
-        sut.fetchData({ _, _ in
+        sut.fetchData({ _ in
             // do nothing
         })
         // Then
@@ -61,7 +61,7 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
         sessionMock.injectableDataTaskReturn = dataTaskSpy
         sut.session = sessionMock
         // When
-        sut.fetchData({ _, _ in
+        sut.fetchData({ _ in
             // do nothing
         })
         // Then
@@ -75,9 +75,14 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
         sut.session = sessionMock
         let completionExpectation = expectation(description: "fetchData should call completionHandler.")
         // When
-        sut.fetchData { (_, error) in
+        sut.fetchData { (result) in
             // Then
-            XCTAssertNotNil(error)
+            switch result {
+            case .failure(let error):
+                XCTAssertNotNil(error)
+            case .success:
+                XCTFail("If there is no data we should not have success.")
+            }
             completionExpectation.fulfill()
         }
         waitForExpectations(timeout: 1.0) { (err) in
@@ -93,13 +98,17 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
         sut.session = sessionMock
         let completionExpectation = expectation(description: "fetchData should call completionHandler.")
         // When
-        sut.fetchData { (_, error) in
+        sut.fetchData { (result) in
             // Then
-            XCTAssertNotNil(error)
-            XCTAssertTrue(error is ITunesRSSFeedGenerator.FeedError,
-                           "The error returned in the completion handler should be the FeedError")
-            XCTAssertEqual( .noData, error as? ITunesRSSFeedGenerator.FeedError,
+            switch result {
+            case .failure(let error):
+                XCTAssertTrue(error is ITunesRSSFeedGenerator.FeedError,
+                               "The error returned in the completion handler should be the FeedError")
+                XCTAssertEqual( .noData, error as? ITunesRSSFeedGenerator.FeedError,
                            "The error returned in the completion handler should be .noData")
+            case .success:
+                XCTFail("If there is no data we should not have success.")
+            }
             completionExpectation.fulfill()
         }
         waitForExpectations(timeout: 1.0) { (err) in
@@ -115,10 +124,14 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
         sut.session = sessionMock
         let completionExpectation = expectation(description: "fetchData should call completionHandler.")
         // When
-        sut.fetchData { (data, error) in
+        sut.fetchData { (result) in
             // Then
-            XCTAssertNil(error, "On success of fetchData error should be nil.")
-            XCTAssertNotNil(data, "On success of fetchData data should not be nil.")
+            switch result {
+            case .failure:
+                XCTFail("On success there should be no failure")
+            case .success(let data):
+                XCTAssertNotNil(data, "On success of fetchData data should not be nil.")
+            }
             completionExpectation.fulfill()
         }
         waitForExpectations(timeout: 1.0) { (err) in
