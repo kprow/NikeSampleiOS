@@ -38,6 +38,7 @@ class DataCacheFromUrl: DataFetcher {
                     completionHandler(.failure(DataError.noData))
                     return
                 }
+                // Happy case 😃
                 completionHandler(.success(data))
             }
         }.resume()

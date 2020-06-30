@@ -64,7 +64,7 @@ class DataCacheFromUrlTests: XCTestCase {
         let sessionMock = URLSessionSpy()
         sessionMock.injectableDataTaskError = NSError(domain: "", code: 0, userInfo: nil)
         sut.session = sessionMock
-        let completionExpectation = expectation(description: "fetchData should call completionHandler.")
+        let completionExpectation = expectation(description: "getData should call completionHandler.")
         // When
         sut.getData(from: url) { (result) in
             // Then
@@ -91,7 +91,7 @@ class DataCacheFromUrlTests: XCTestCase {
         let sessionMock = URLSessionSpy()
         sessionMock.injectableDataTaskData = nil
         sut.session = sessionMock
-        let completionExpectation = expectation(description: "fetchData should call completionHandler.")
+        let completionExpectation = expectation(description: "getData should call completionHandler.")
         // When
         sut.getData(from: url) { (result) in
             // Then
@@ -103,6 +103,34 @@ class DataCacheFromUrlTests: XCTestCase {
                            "The error returned in the completion handler should be .noData")
             case .success:
                 XCTFail("If there is no data we should not have success.")
+            }
+            completionExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
+    // Test Happy case 😃
+    func testFetchDataSuccessWithDataAndNoError() {
+        // Given
+        guard let url = URL(string: "google.com") else {
+            XCTFail("Unable to create url.")
+            return
+        }
+        let sessionMock = URLSessionSpy()
+        sessionMock.injectableDataTaskData = "{}".data(using: .utf8)
+        sut.session = sessionMock
+        let completionExpectation = expectation(description: "getData should call completionHandler.")
+        // When
+        sut.getData(from: url) { (result) in
+            // Then
+            switch result {
+            case .failure:
+                XCTFail("On success there should be no failure")
+            case .success(let data):
+                XCTAssertNotNil(data, "On success of getData data should not be nil.")
             }
             completionExpectation.fulfill()
         }
