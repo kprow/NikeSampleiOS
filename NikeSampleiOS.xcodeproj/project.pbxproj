@@ -36,6 +36,8 @@
 		C97B2BB224AA63A6003518A0 /* ITunesRSSFeedResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BB124AA63A6003518A0 /* ITunesRSSFeedResults.swift */; };
 		C97B2BB424AAB621003518A0 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BB324AAB621003518A0 /* AlbumTableViewCell.swift */; };
 		C97B2BBA24ABCCA1003518A0 /* UrlSessionMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BB924ABCCA1003518A0 /* UrlSessionMocks.swift */; };
+		C97B2BBC24ABCD3D003518A0 /* DataCacheFromUrlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BBB24ABCD3D003518A0 /* DataCacheFromUrlTests.swift */; };
+		C97B2BBE24ABCD94003518A0 /* DataCacheFromUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BBD24ABCD94003518A0 /* DataCacheFromUrl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		C97B2BB124AA63A6003518A0 /* ITunesRSSFeedResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesRSSFeedResults.swift; sourceTree = "<group>"; };
 		C97B2BB324AAB621003518A0 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
 		C97B2BB924ABCCA1003518A0 /* UrlSessionMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionMocks.swift; sourceTree = "<group>"; };
+		C97B2BBB24ABCD3D003518A0 /* DataCacheFromUrlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCacheFromUrlTests.swift; sourceTree = "<group>"; };
+		C97B2BBD24ABCD94003518A0 /* DataCacheFromUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCacheFromUrl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				C97B2B9B24A98B1B003518A0 /* Constants.swift */,
+				C97B2BBD24ABCD94003518A0 /* DataCacheFromUrl.swift */,
 				C97B2BB824ABC602003518A0 /* ITunesRSSFeed */,
 				C97B2BB724ABC5ED003518A0 /* URLSession */,
 			);
@@ -241,6 +246,7 @@
 				C97B2BAD24A9AEB0003518A0 /* JsonForTests.swift */,
 				C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */,
 				C97B2BB924ABCCA1003518A0 /* UrlSessionMocks.swift */,
+				C97B2BBB24ABCD3D003518A0 /* DataCacheFromUrlTests.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 				C97B2B9024A97E1D003518A0 /* ShowAlbumsInteractor.swift in Sources */,
 				C97B2BA924A9ADE0003518A0 /* URLSessionProtocol.swift in Sources */,
 				C97B2B9C24A98B1B003518A0 /* Constants.swift in Sources */,
+				C97B2BBE24ABCD94003518A0 /* DataCacheFromUrl.swift in Sources */,
 				C97B2BA524A9A39E003518A0 /* Album.swift in Sources */,
 				C97B2B8C24A97E1D003518A0 /* ShowAlbumsWorker.swift in Sources */,
 				C97B2B9F24A99F6A003518A0 /* Genre.swift in Sources */,
@@ -446,6 +453,7 @@
 				C97B2B9824A989F3003518A0 /* ShowAlbumsInteractorTests.swift in Sources */,
 				C97B2BB024A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift in Sources */,
 				C97B2BAE24A9AEB0003518A0 /* JsonForTests.swift in Sources */,
+				C97B2BBC24ABCD3D003518A0 /* DataCacheFromUrlTests.swift in Sources */,
 				C97B2BBA24ABCCA1003518A0 /* UrlSessionMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
