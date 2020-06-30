@@ -17,6 +17,9 @@ class AlbumTableViewCell: UITableViewCell {
     var albumImage: UIImage? {
         didSet {
             imageView?.image = albumImage
+            if albumImage != nil, albumImage != UIImage() {
+                activityIndicator.stopAnimating()
+            }
         }
     }
 
@@ -52,7 +55,7 @@ class AlbumTableViewCell: UITableViewCell {
                 // Image View Constraints
                 imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
                 imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-                imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+                imageView.heightAnchor.constraint(equalToConstant: 60),
                 imageView.widthAnchor.constraint(equalTo: heightAnchor),
                 activityIndicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
                 activityIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
@@ -69,5 +72,8 @@ class AlbumTableViewCell: UITableViewCell {
             }
         }
         accessoryType = .disclosureIndicator
+    }
+    override func prepareForReuse() {
+        albumImage = nil
     }
 }
