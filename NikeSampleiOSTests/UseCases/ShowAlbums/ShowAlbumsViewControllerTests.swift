@@ -180,4 +180,25 @@ class ShowAlbumsViewControllerTests: XCTestCase {
         XCTAssertTrue(tableViewSpy.hasReloadDataBeenCalled,
                       "We should also reload data after displayArtwork is called so the cells are updated.")
     }
+    let testImage: UIImage? = {
+        // Draw image
+        let size = CGSize(width: 10, height: 10)
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+        // Capture renedered image
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }()
+    func testCellForRowAtSetsImageArtwork() {
+        // Given
+        let imageData = testImage?.pngData()
+        let artwork = ShowAlbums.Fetch.ViewModel.Album(name: "name", artist: "artist", imageData: imageData)
+        sut.albums = [artwork]
+        // When
+        let observedCell = sut.tableView(sut.tableView, cellForRowAt: IndexPath(row: 0, section: 0))
+            as? AlbumTableViewCell
+        // Then
+        XCTAssertNotEqual(UIImage(), observedCell?.albumImage,
+                          "If image data is set in the current album, we should not have a default image.")
+    }
 }

@@ -109,4 +109,15 @@ class ShowAlbumsPresenterTests: XCTestCase {
         XCTAssertEqual(Constants.unknownArtistName, vcSpy.observedDisplayAlbumsVM?.albums.first?.artist,
                        "The artist of the album in the view model should be default if unknown.")
     }
+    func testPresentAlbumArtworkCallsDisplayAlbumArtwork() {
+        // Given
+        let vcSpy = ViewControllerSpy()
+        sut.viewController = vcSpy
+        let givenArtwork = ShowAlbums.Fetch.ArtWork(imageData: Data(), index: 3)
+        // When
+        sut.presentAlbumArtwork(artwork: givenArtwork)
+        // Then
+        XCTAssertTrue(vcSpy.hasDisplayAlbumArtworkBeenCalled,
+                      "presentAlbumArtwork is a pass thru and should call displayAlbumArtwork.")
+    }
 }
