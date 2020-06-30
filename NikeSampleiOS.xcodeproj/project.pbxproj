@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C937937224ABF23700F1C3B3 /* UITableViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C937937124ABF23700F1C3B3 /* UITableViewMock.swift */; };
 		C97B2B5024A96F4D003518A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B4F24A96F4D003518A0 /* AppDelegate.swift */; };
 		C97B2B5224A96F4D003518A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2B5124A96F4D003518A0 /* SceneDelegate.swift */; };
 		C97B2B5924A96F4D003518A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C97B2B5824A96F4D003518A0 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		C97B2BC924ABDF50003518A0 /* AlbumDetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BC324ABDF4F003518A0 /* AlbumDetailsModels.swift */; };
 		C97B2BCA24ABDF50003518A0 /* AlbumDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BC424ABDF4F003518A0 /* AlbumDetailsViewController.swift */; };
 		C97B2BCB24ABDF50003518A0 /* AlbumDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BC524ABDF4F003518A0 /* AlbumDetailsInteractor.swift */; };
+		C97B2BCD24ABE6FB003518A0 /* ShowAlbumsRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BCC24ABE6FB003518A0 /* ShowAlbumsRouterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C937937124ABF23700F1C3B3 /* UITableViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewMock.swift; sourceTree = "<group>"; };
 		C97B2B4C24A96F4D003518A0 /* NikeSampleiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NikeSampleiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C97B2B4F24A96F4D003518A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C97B2B5124A96F4D003518A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 		C97B2BC324ABDF4F003518A0 /* AlbumDetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsModels.swift; sourceTree = "<group>"; };
 		C97B2BC424ABDF4F003518A0 /* AlbumDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsViewController.swift; sourceTree = "<group>"; };
 		C97B2BC524ABDF4F003518A0 /* AlbumDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsInteractor.swift; sourceTree = "<group>"; };
+		C97B2BCC24ABE6FB003518A0 /* ShowAlbumsRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAlbumsRouterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +240,7 @@
 				C97B2B9424A989F3003518A0 /* ShowAlbumsInteractorTests.swift */,
 				C97B2B9524A989F3003518A0 /* ShowAlbumsWorkerTests.swift */,
 				C97B2B9624A989F3003518A0 /* ShowAlbumsPresenterTests.swift */,
+				C97B2BCC24ABE6FB003518A0 /* ShowAlbumsRouterTests.swift */,
 			);
 			path = ShowAlbums;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */,
 				C97B2BB924ABCCA1003518A0 /* UrlSessionMocks.swift */,
 				C97B2BBB24ABCD3D003518A0 /* DataCacheFromUrlTests.swift */,
+				C937937124ABF23700F1C3B3 /* UITableViewMock.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C97B2B9A24A989F3003518A0 /* ShowAlbumsPresenterTests.swift in Sources */,
+				C97B2BCD24ABE6FB003518A0 /* ShowAlbumsRouterTests.swift in Sources */,
 				C97B2B9924A989F3003518A0 /* ShowAlbumsWorkerTests.swift in Sources */,
 				C97B2BA324A9A2CB003518A0 /* ModelCreationTests.swift in Sources */,
 				C97B2B6724A96F4E003518A0 /* NikeSampleiOSTests.swift in Sources */,
@@ -479,6 +486,7 @@
 				C97B2BAE24A9AEB0003518A0 /* JsonForTests.swift in Sources */,
 				C97B2BBC24ABCD3D003518A0 /* DataCacheFromUrlTests.swift in Sources */,
 				C97B2BBA24ABCCA1003518A0 /* UrlSessionMocks.swift in Sources */,
+				C937937224ABF23700F1C3B3 /* UITableViewMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

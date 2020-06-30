@@ -25,6 +25,16 @@ class ShowAlbumsRouter: ShowAlbumsRoutingLogic, ShowAlbumsDataPassing {
     // MARK: Routing
 
     func routeToAlbumDetails() {
-        // need to implement
+        let detailsVC = AlbumDetailsViewController()
+        guard var destination = detailsVC.interactor as? AlbumDetailsDataStore,
+            let source = dataStore else {
+            return
+        }
+        let row = viewController?.tableView.indexPathForSelectedRow?.row ?? 0
+        guard source.albums.indices.contains(row) else {
+            return
+        }
+        destination.album = source.albums[row]
+        viewController?.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
