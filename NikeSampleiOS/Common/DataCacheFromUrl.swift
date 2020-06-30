@@ -29,6 +29,22 @@ class DataCacheFromUrl: DataFetcher {
     func getData(from url: URL, _ completionHandler: @escaping (Result<Data, Error>) -> Void) {
         let request = URLRequest(url: url)
         session.dataTask(with: request) { (data, _, error) in
+            DispatchQueue.main.async {
+                if let err = error {
+                    completionHandler(.failure(err))
+                    return
+                }
+                guard let data = data else {
+                    completionHandler(.failure(DataError.noData))
+                    return
+                }
+                completionHandler(.success(data))
+            }
         }.resume()
+    }
+}
+extension DataCacheFromUrl {
+    enum DataError: Error {
+        case noData
     }
 }

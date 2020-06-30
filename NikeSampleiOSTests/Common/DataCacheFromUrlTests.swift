@@ -55,4 +55,61 @@ class DataCacheFromUrlTests: XCTestCase {
         XCTAssertTrue(dataTaskSpy.hasResumeBeenCalled,
                       "After creating the dataTask in getData, we should call resume.")
     }
+    func testGetDataWithErrorCallsCompletionHandlerWithError() {
+        // Given
+        guard let url = URL(string: "google.com") else {
+            XCTFail("Unable to create url.")
+            return
+        }
+        let sessionMock = URLSessionSpy()
+        sessionMock.injectableDataTaskError = NSError(domain: "", code: 0, userInfo: nil)
+        sut.session = sessionMock
+        let completionExpectation = expectation(description: "fetchData should call completionHandler.")
+        // When
+        sut.getData(from: url) { (result) in
+            // Then
+            switch result {
+            case .failure(let error):
+                XCTAssertNotNil(error)
+            case .success:
+                XCTFail("If there is no data we should not have success.")
+            }
+            completionExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
+    func testFetchDataWithNoDataCallsCompletionHandlerWithError() {
+        // Given
+        guard let url = URL(string: "google.com") else {
+            XCTFail("Unable to create url.")
+            return
+        }
+        let sessionMock = URLSessionSpy()
+        sessionMock.injectableDataTaskData = nil
+        sut.session = sessionMock
+        let completionExpectation = expectation(description: "fetchData should call completionHandler.")
+        // When
+        sut.getData(from: url) { (result) in
+            // Then
+            switch result {
+            case .failure(let error):
+                XCTAssertTrue(error is DataCacheFromUrl.DataError,
+                               "The error returned in the completion handler should be the DataError")
+                XCTAssertEqual( .noData, error as? DataCacheFromUrl.DataError,
+                           "The error returned in the completion handler should be .noData")
+            case .success:
+                XCTFail("If there is no data we should not have success.")
+            }
+            completionExpectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0) { (err) in
+            if let err = err {
+                XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
 }
