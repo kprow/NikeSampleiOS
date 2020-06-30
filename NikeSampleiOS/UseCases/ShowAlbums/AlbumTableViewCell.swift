@@ -19,7 +19,8 @@ class AlbumTableViewCell: UITableViewCell {
             imageView?.image = albumImage
         }
     }
-
+    
+    /// The "loading" view for the image if it's not yet fetched
     private let activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -28,30 +29,44 @@ class AlbumTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: AlbumTableViewCell.reuseIdentifier)
-        layoutImageView()
+        layoutTableViewCell()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        layoutImageView()
+        layoutTableViewCell()
     }
-
-    private func layoutImageView() {
-        if let imageView = imageView {
+    
+    /// Method to use AutoLayout constraints to set the content correctly within the tableViewCell
+    private func layoutTableViewCell() {
+        if let imageView = imageView,
+            let textLabel = textLabel,
+            let detailTextLabel = detailTextLabel {
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.addSubview(activityIndicator)
 
+            textLabel.translatesAutoresizingMaskIntoConstraints = false
+            detailTextLabel.translatesAutoresizingMaskIntoConstraints = false
+
             NSLayoutConstraint.activate([
+                // Image View Constraints
                 imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
                 imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
                 imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
                 imageView.widthAnchor.constraint(equalTo: heightAnchor),
                 activityIndicator.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
-                activityIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
+                activityIndicator.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+                // Text Label Constraints
+                textLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 10.0),
+                textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
+                // Detail Text Label Constraints
+                detailTextLabel.leadingAnchor.constraint(equalTo: textLabel.leadingAnchor),
+                detailTextLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 10.0)
             ])
             if imageView.image == nil {
                 activityIndicator.startAnimating()
             }
         }
+        accessoryType = .disclosureIndicator
     }
 }
