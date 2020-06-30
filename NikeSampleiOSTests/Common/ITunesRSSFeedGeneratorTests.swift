@@ -23,25 +23,7 @@ class ITunesRSSFeedGeneratorTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     // MARK: Test doubles
-    class URLSessionSpy: URLSessionProtocol {
-        var hasDataTaskBeenCalled = false
-        var injectableDataTaskReturn = URLSessionDataTaskSpy()
-        var injectableDataTaskData: Data?
-        var injectableDataTaskResponse: URLResponse?
-        var injectableDataTaskError: Error?
-        func dataTask(with request: URLRequest,
-                      completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {
-            hasDataTaskBeenCalled = true
-            completionHandler(injectableDataTaskData, injectableDataTaskResponse, injectableDataTaskError)
-            return injectableDataTaskReturn
-        }
-    }
-    class URLSessionDataTaskSpy: URLSessionDataTaskProtocol {
-        var hasResumeBeenCalled = false
-        func resume() {
-            hasResumeBeenCalled = true
-        }
-    }
+
     func testFetchDataCallsDataTask() {
         // Given
         let sessionSpy = URLSessionSpy()

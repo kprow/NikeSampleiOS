@@ -35,6 +35,7 @@
 		C97B2BB024A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */; };
 		C97B2BB224AA63A6003518A0 /* ITunesRSSFeedResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BB124AA63A6003518A0 /* ITunesRSSFeedResults.swift */; };
 		C97B2BB424AAB621003518A0 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BB324AAB621003518A0 /* AlbumTableViewCell.swift */; };
+		C97B2BBA24ABCCA1003518A0 /* UrlSessionMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97B2BB924ABCCA1003518A0 /* UrlSessionMocks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesRSSFeedGeneratorTests.swift; sourceTree = "<group>"; };
 		C97B2BB124AA63A6003518A0 /* ITunesRSSFeedResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesRSSFeedResults.swift; sourceTree = "<group>"; };
 		C97B2BB324AAB621003518A0 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
+		C97B2BB924ABCCA1003518A0 /* UrlSessionMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionMocks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,10 +179,8 @@
 			isa = PBXGroup;
 			children = (
 				C97B2B9B24A98B1B003518A0 /* Constants.swift */,
-				C97B2BA624A9AC79003518A0 /* ITunesRSSFeedGenerator.swift */,
-				C97B2BAA24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift */,
-				C97B2BA824A9ADE0003518A0 /* URLSessionProtocol.swift */,
-				C97B2BB124AA63A6003518A0 /* ITunesRSSFeedResults.swift */,
+				C97B2BB824ABC602003518A0 /* ITunesRSSFeed */,
+				C97B2BB724ABC5ED003518A0 /* URLSession */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -240,8 +240,27 @@
 			children = (
 				C97B2BAD24A9AEB0003518A0 /* JsonForTests.swift */,
 				C97B2BAF24A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift */,
+				C97B2BB924ABCCA1003518A0 /* UrlSessionMocks.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		C97B2BB724ABC5ED003518A0 /* URLSession */ = {
+			isa = PBXGroup;
+			children = (
+				C97B2BAA24A9AE1F003518A0 /* URLSessionDataTaskProtocol.swift */,
+				C97B2BA824A9ADE0003518A0 /* URLSessionProtocol.swift */,
+			);
+			path = URLSession;
+			sourceTree = "<group>";
+		};
+		C97B2BB824ABC602003518A0 /* ITunesRSSFeed */ = {
+			isa = PBXGroup;
+			children = (
+				C97B2BA624A9AC79003518A0 /* ITunesRSSFeedGenerator.swift */,
+				C97B2BB124AA63A6003518A0 /* ITunesRSSFeedResults.swift */,
+			);
+			path = ITunesRSSFeed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,6 +446,7 @@
 				C97B2B9824A989F3003518A0 /* ShowAlbumsInteractorTests.swift in Sources */,
 				C97B2BB024A9B899003518A0 /* ITunesRSSFeedGeneratorTests.swift in Sources */,
 				C97B2BAE24A9AEB0003518A0 /* JsonForTests.swift in Sources */,
+				C97B2BBA24ABCCA1003518A0 /* UrlSessionMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
