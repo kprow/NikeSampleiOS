@@ -30,6 +30,8 @@ class ShowAlbumsInteractor: ShowAlbumsBusinessLogic, ShowAlbumsDataStore {
     var presenter: ShowAlbumsPresentationLogic?
     /// Dependency - A worker object to handle the calling of the api to fetch data that will become albums
     var worker: ShowAlbumsWorkerProtocol? = ShowAlbumsWorker()
+    /// Dependency - A helperi to fetch data that will become album artwork
+    var dataCache: DataFetcher? = DataCacheFromUrl()
 
     var albums: [Album] = []
 
@@ -48,15 +50,13 @@ class ShowAlbumsInteractor: ShowAlbumsBusinessLogic, ShowAlbumsDataStore {
         })
     }
     private func fetchAlbumArtwork(index: Int, urlString: String?) {
-        DispatchQueue.global(qos: .background).async { [unowned self] in
-            if let urlString = urlString,
-                let url = URL(string: urlString),
-                let data = try? Data(contentsOf: url) {
-                DispatchQueue.main.async { [unowned self] in
-                    let albumArtwork = ShowAlbums.Fetch.ArtWork(imageData: data, index: index)
-                    self.presenter?.presentAlbumArtwork(artwork: albumArtwork)
+        if let urlString = urlString, let url = URL(string: urlString) {
+            dataCache?.getData(from: url, { [unowned self](result) in
+                if case let Result.success(artworkImageData) = result {
+                    let artwork = ShowAlbums.Fetch.ArtWork(imageData: artworkImageData, index: index)
+                    self.presenter?.presentAlbumArtwork(artwork: artwork)
                 }
-            }
+            })
         }
     }
 }

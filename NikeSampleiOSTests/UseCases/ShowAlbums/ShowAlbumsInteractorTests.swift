@@ -60,6 +60,20 @@ class ShowAlbumsInteractorTests: XCTestCase {
             observePresentAlbumArtwork = artwork
         }
     }
+    class DataFetcherSpy: DataFetcher {
+        static var dataCache = NSCache<AnyObject, AnyObject>()
+
+        var hasGetDataBeenCalled = false
+        var observeGetDataUrl: URL?
+        var injectableGetDataResult: Result<Data, Error>?
+        func getData(from url: URL, _ completionHandler: @escaping (Result<Data, Error>) -> Void) {
+            hasGetDataBeenCalled = true
+            observeGetDataUrl = url
+            if let result = injectableGetDataResult {
+                completionHandler(result)
+            }
+        }
+    }
 
     // MARK: Tests
 
@@ -85,5 +99,55 @@ class ShowAlbumsInteractorTests: XCTestCase {
         // Then
         XCTAssertTrue(presenterSpy.hasPresentAlbumsBeenCalled,
                       "When we call fetchAlbums and we get a successful response we should call presentAlbums")
+    }
+
+    let albumWithArtWork = Album(artistName: "artist name",
+                                 id: nil,
+                                 releaseDate: nil,
+                                 name: "album name",
+                                 kind: nil,
+                                 copyright: nil,
+                                 artistId: nil,
+                                 contentAdvisoryRating: nil,
+                                 artistUrl: nil,
+                                 artworkUrl100: "google.com",
+                                 genres: nil,
+                                 url: nil)
+    func testFetchAlbumsWithSuccesCallGetDataForAlbumArtwork() {
+        // Given
+        let workerSpy = WorkerSpy()
+        workerSpy.injectableFetchFromAPIResult = .success([albumWithArtWork])
+        sut.worker = workerSpy
+        let presenterSpy = PresenterSpy()
+        sut.presenter = presenterSpy
+        let dataFetcherSpy = DataFetcherSpy()
+        sut.dataCache = dataFetcherSpy
+        // When
+        sut.fetchAlbums(request: ShowAlbums.Fetch.Request())
+        // Then
+        XCTAssertTrue(dataFetcherSpy.hasGetDataBeenCalled,
+                      "fetchAlbums with a successful response should call getData for the artwork.")
+    }
+    func testFetchAlbumsWithSuccessfulArtworkDownloadShouldCallPresentArtwork() {
+        // Given
+        let workerSpy = WorkerSpy()
+        workerSpy.injectableFetchFromAPIResult = .success([albumWithArtWork])
+        sut.worker = workerSpy
+        let presenterSpy = PresenterSpy()
+        sut.presenter = presenterSpy
+        let dataFetcherSpy = DataFetcherSpy()
+        sut.dataCache = dataFetcherSpy
+        let givenData = ":)".data(using: .utf8) ?? Data()
+        dataFetcherSpy.injectableGetDataResult = .success(givenData)
+        let expectedArtwork = ShowAlbums.Fetch.ArtWork(imageData: givenData, index: 0)
+        // When
+        sut.fetchAlbums(request: ShowAlbums.Fetch.Request())
+        // Then
+        XCTAssertTrue(presenterSpy.hasPresentAlbumArtworkBeenCalled,
+                      "fetchAlbums with a successful downloaded artwork should call presentAlbumArtwork.")
+        XCTAssertEqual(expectedArtwork.imageData, presenterSpy.observePresentAlbumArtwork?.imageData,
+                       "The image data that's given upon success should be presented.")
+        XCTAssertEqual(expectedArtwork.index, presenterSpy.observePresentAlbumArtwork?.index,
+                       "The index that should be presented is 0.")
     }
 }
