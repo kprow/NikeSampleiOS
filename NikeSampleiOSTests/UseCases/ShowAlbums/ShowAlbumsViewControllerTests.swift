@@ -72,6 +72,14 @@ class ShowAlbumsViewControllerTests: XCTestCase {
             return injectableDequeueTableViewCellReturn
         }
     }
+    class RouterSpy: ShowAlbumsRoutingLogic, ShowAlbumsDataPassing {
+        var dataStore: ShowAlbumsDataStore?
+
+        var hasRoutToAlbumDetailsBeenCalled = false
+        func routeToAlbumDetails() {
+            hasRoutToAlbumDetailsBeenCalled = true
+        }
+    }
 
     // MARK: Tests
     func testViewDidLoadSetsTitle() {
@@ -210,5 +218,19 @@ class ShowAlbumsViewControllerTests: XCTestCase {
         // Then
         XCTAssertNil(albumTVC.albumImage,
                      "When we prepare a cell for re use we should set the album image back to nil.")
+    }
+    func testDidSelectRowAtRoutesToAlbumDetails() {
+        // Given
+        let routerSpy = RouterSpy()
+        sut.router = routerSpy
+        sut.albums = [ShowAlbums.Fetch.ViewModel.Album(
+            name: "name",
+            artist: "artist",
+            imageData: nil)]
+        // When
+        sut.tableView(sut.tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        // Then
+        XCTAssertTrue(routerSpy.hasRoutToAlbumDetailsBeenCalled,
+            "When we select an album from the list, we should route to the Album Details scene.")
     }
 }

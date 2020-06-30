@@ -11,7 +11,7 @@
 //
 
 protocol ShowAlbumsRoutingLogic {
-    //func routeToSomewhere()
+    func routeToAlbumDetails()
 }
 
 protocol ShowAlbumsDataPassing {
@@ -23,4 +23,8 @@ class ShowAlbumsRouter: ShowAlbumsRoutingLogic, ShowAlbumsDataPassing {
     var dataStore: ShowAlbumsDataStore?
 
     // MARK: Routing
+
+    func routeToAlbumDetails() {
+        // need to implement
+    }
 }

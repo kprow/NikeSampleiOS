@@ -116,3 +116,11 @@ extension ShowAlbumsViewController {
         return cell
     }
 }
+
+// MARK: - UITableViewDelegate
+
+extension ShowAlbumsViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        router?.routeToAlbumDetails()
+    }
+}
