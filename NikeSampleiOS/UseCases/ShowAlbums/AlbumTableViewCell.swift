@@ -19,7 +19,7 @@ class AlbumTableViewCell: UITableViewCell {
             imageView?.image = albumImage
         }
     }
-    
+
     /// The "loading" view for the image if it's not yet fetched
     private let activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
@@ -36,7 +36,7 @@ class AlbumTableViewCell: UITableViewCell {
         super.init(coder: coder)
         layoutTableViewCell()
     }
-    
+
     /// Method to use AutoLayout constraints to set the content correctly within the tableViewCell
     private func layoutTableViewCell() {
         if let imageView = imageView,
@@ -61,7 +61,8 @@ class AlbumTableViewCell: UITableViewCell {
                 textLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10.0),
                 // Detail Text Label Constraints
                 detailTextLabel.leadingAnchor.constraint(equalTo: textLabel.leadingAnchor),
-                detailTextLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 10.0)
+                detailTextLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 10.0),
+                detailTextLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10.0)
             ])
             if imageView.image == nil {
                 activityIndicator.startAnimating()
