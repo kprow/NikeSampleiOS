@@ -9,6 +9,7 @@
 //    you can apply clean architecture to your iOS and Mac projects,
 //    see http://clean-swift.com
 //
+import Foundation
 
 // swiftlint:disable nesting
 enum ShowAlbums {
@@ -29,8 +30,13 @@ enum ShowAlbums {
             struct Album {
                 let name: String
                 let artist: String
+                var imageData: Data?
             }
             let albums: [Album]
+        }
+        struct ArtWork {
+            let imageData: Data
+            let index: Int
         }
     }
 }

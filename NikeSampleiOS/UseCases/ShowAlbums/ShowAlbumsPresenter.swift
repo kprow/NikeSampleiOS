@@ -10,11 +10,21 @@
 //    see http://clean-swift.com
 //
 
+/// Definition of presentation logic that will be calling the UI.
 protocol ShowAlbumsPresentationLogic {
+
+    /// Method to create view models from Album domain models and call the appropriate view display methods.
+    /// - Parameter response: The response object containing domain models.
     func presentAlbums(response: ShowAlbums.Fetch.Response)
+
+    /// Method to pass along the album artwork to the appropriate display method.
+    /// - Parameter artwork: The artwork data along with it's index.
+    func presentAlbumArtwork(artwork: ShowAlbums.Fetch.ArtWork)
 }
 
 class ShowAlbumsPresenter: ShowAlbumsPresentationLogic {
+    /// Dependency - The view with appropriate display methods.
+    /// This is weak to not cause a strong retain cycle that cannot free up memory after scene is de-allocated.
     weak var viewController: ShowAlbumsDisplayLogic?
 
     // MARK: Fetch albums
@@ -27,5 +37,9 @@ class ShowAlbumsPresenter: ShowAlbumsPresentationLogic {
         }
         let viewModel = ShowAlbums.Fetch.ViewModel(albums: albumViewModels)
         viewController?.displayAlbums(viewModel: viewModel)
+    }
+
+    func presentAlbumArtwork(artwork: ShowAlbums.Fetch.ArtWork) {
+        viewController?.displayAlbumArtwork(artwork: artwork)
     }
 }

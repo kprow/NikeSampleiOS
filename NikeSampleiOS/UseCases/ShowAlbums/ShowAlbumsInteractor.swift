@@ -9,6 +9,7 @@
 //    you can apply clean architecture to your iOS and Mac projects,
 //    see http://clean-swift.com
 //
+import Foundation
 
 /// Definition of business logic performed in this scene.
 protocol ShowAlbumsBusinessLogic {
@@ -37,9 +38,25 @@ class ShowAlbumsInteractor: ShowAlbumsBusinessLogic, ShowAlbumsDataStore {
     func fetchAlbums(request: ShowAlbums.Fetch.Request) {
         worker?.fetchFromAPI({ [unowned self](result) in
             if case let Result.success(albums) = result {
+                self.albums = albums
                 let response = ShowAlbums.Fetch.Response(albums: albums)
                 self.presenter?.presentAlbums(response: response)
+                albums.enumerated().forEach {
+                    self.fetchAlbumArtwork(index: $0, urlString: $1.artworkUrl100)
+                }
             }
         })
+    }
+    private func fetchAlbumArtwork(index: Int, urlString: String?) {
+        DispatchQueue.global(qos: .background).async { [unowned self] in
+            if let urlString = urlString,
+                let url = URL(string: urlString),
+                let data = try? Data(contentsOf: url) {
+                DispatchQueue.main.async { [unowned self] in
+                    let albumArtwork = ShowAlbums.Fetch.ArtWork(imageData: data, index: index)
+                    self.presenter?.presentAlbumArtwork(artwork: albumArtwork)
+                }
+            }
+        }
     }
 }

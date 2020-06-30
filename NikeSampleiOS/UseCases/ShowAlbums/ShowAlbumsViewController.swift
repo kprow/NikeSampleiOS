@@ -17,6 +17,10 @@ protocol ShowAlbumsDisplayLogic: class {
     /// Sets the view models locally to be displayed by the View Controller
     /// - Parameter viewModel: an array of albums with Name, Artist, and Album Artwork
     func displayAlbums(viewModel: ShowAlbums.Fetch.ViewModel)
+
+    /// Sets the UIImageView with the artwork.
+    /// - Parameter artwork: Artwork view model consisting of image data and an index.
+    func displayAlbumArtwork(artwork: ShowAlbums.Fetch.ArtWork)
 }
 
 /// View Controller to show a list of albums
@@ -62,6 +66,7 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
         super.viewDidLoad()
         self.title = Constants.showAlbmusVCTitle
         tableView.register(AlbumTableViewCell.self, forCellReuseIdentifier: AlbumTableViewCell.reuseIdentifier)
+        tableView.rowHeight = UITableView.automaticDimension
         fetchAlbums()
     }
 
@@ -80,6 +85,13 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
         albums = viewModel.albums
         tableView.reloadData()
     }
+    func displayAlbumArtwork(artwork: ShowAlbums.Fetch.ArtWork) {
+        if albums.indices.contains(artwork.index) {
+            albums[artwork.index].imageData = artwork.imageData
+            let indexPath = IndexPath(row: artwork.index, section: 0)
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -97,7 +109,11 @@ extension ShowAlbumsViewController {
         let currentAlbum = albums[indexPath.row]
         cell.textLabel?.text = currentAlbum.name
         cell.detailTextLabel?.text = currentAlbum.artist
-        cell.albumImage = UIImage()
+        if let imageData = currentAlbum.imageData {
+            cell.albumImage = UIImage(data: imageData)
+        } else {
+            cell.albumImage = UIImage()
+        }
         return cell
     }
 }
