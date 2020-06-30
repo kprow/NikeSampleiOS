@@ -89,10 +89,15 @@ extension ShowAlbumsViewController {
         return albums.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AlbumTableViewCell.reuseIdentifier, for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: AlbumTableViewCell.reuseIdentifier,
+            for: indexPath) as? AlbumTableViewCell else {
+            return UITableViewCell()
+        }
         let currentAlbum = albums[indexPath.row]
         cell.textLabel?.text = currentAlbum.name
         cell.detailTextLabel?.text = currentAlbum.artist
+        cell.albumImage = UIImage()
         return cell
     }
 }
