@@ -166,4 +166,18 @@ class ShowAlbumsViewControllerTests: XCTestCase {
         XCTAssertEqual(givenArtist, observedCell.detailTextLabel?.text,
                        "We should set the detail text labe to be the the given artist name.")
     }
+    func testDisplayAlbumArtworkSetsAlbumImageData() {
+        // Given
+        sut.albums = [ShowAlbums.Fetch.ViewModel.Album(name: "name", artist: "artist")]
+        let tableViewSpy = UITableViewSpy()
+        sut.tableView = tableViewSpy
+        let artwork = ShowAlbums.Fetch.ArtWork(imageData: Data(), index: 0)
+        // When
+        sut.displayAlbumArtwork(artwork: artwork)
+        // Then
+        XCTAssertNotNil(sut.albums.first?.imageData,
+                        "After calling display artwork, the image data for that album should not be nil.")
+        XCTAssertTrue(tableViewSpy.hasReloadDataBeenCalled,
+                      "We should also reload data after displayArtwork is called so the cells are updated.")
+    }
 }

@@ -88,8 +88,7 @@ class ShowAlbumsViewController: UITableViewController, ShowAlbumsDisplayLogic {
     func displayAlbumArtwork(artwork: ShowAlbums.Fetch.ArtWork) {
         if albums.indices.contains(artwork.index) {
             albums[artwork.index].imageData = artwork.imageData
-            let indexPath = IndexPath(row: artwork.index, section: 0)
-            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.reloadData()
         }
     }
 }
