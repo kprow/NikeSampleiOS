@@ -20,7 +20,7 @@ struct ITunesRSSFeedGenerator: ITunesAPIProtocol {
 
     /// The url used to fetch rss feed
     private let baseURL =
-    "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/10/explicit.json"
+    "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/100/explicit.json"
 
     /// Dependency - the session used to perform dataTasks(requests)
     var session: URLSessionProtocol = URLSession.shared

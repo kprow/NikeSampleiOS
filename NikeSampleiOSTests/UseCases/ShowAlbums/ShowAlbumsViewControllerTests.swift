@@ -201,4 +201,14 @@ class ShowAlbumsViewControllerTests: XCTestCase {
         XCTAssertNotEqual(UIImage(), observedCell?.albumImage,
                           "If image data is set in the current album, we should not have a default image.")
     }
+    func testTableCellPrepareForReuseSetsAlbumImageToNil() {
+        // Given
+        let albumTVC = AlbumTableViewCell()
+        albumTVC.albumImage = UIImage()
+        // When
+        albumTVC.prepareForReuse()
+        // Then
+        XCTAssertNil(albumTVC.albumImage,
+                     "When we prepare a cell for re use we should set the album image back to nil.")
+    }
 }
