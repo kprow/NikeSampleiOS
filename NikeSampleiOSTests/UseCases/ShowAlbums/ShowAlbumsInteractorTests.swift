@@ -53,6 +53,12 @@ class ShowAlbumsInteractorTests: XCTestCase {
             hasPresentAlbumsBeenCalled = true
             observePresentAlbumsResponse = response
         }
+        var hasPresentAlbumArtworkBeenCalled = false
+        var observePresentAlbumArtwork: ShowAlbums.Fetch.ArtWork?
+        func presentAlbumArtwork(artwork: ShowAlbums.Fetch.ArtWork) {
+            hasPresentAlbumArtworkBeenCalled = true
+            observePresentAlbumArtwork = artwork
+        }
     }
 
     // MARK: Tests

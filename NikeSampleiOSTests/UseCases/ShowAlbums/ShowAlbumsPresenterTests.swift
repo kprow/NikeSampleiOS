@@ -44,6 +44,12 @@ class ShowAlbumsPresenterTests: XCTestCase {
             hasDisplayAlbumsBeenCalled = true
             observedDisplayAlbumsVM = viewModel
         }
+        var hasDisplayAlbumArtworkBeenCalled = false
+        var observeDisplayAlbumArtwork: ShowAlbums.Fetch.ArtWork?
+        func displayAlbumArtwork(artwork: ShowAlbums.Fetch.ArtWork) {
+            hasDisplayAlbumArtworkBeenCalled = true
+            observeDisplayAlbumArtwork = artwork
+        }
     }
 
     // MARK: Tests
