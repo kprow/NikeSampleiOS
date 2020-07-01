@@ -14,7 +14,19 @@ import UIKit
 
 enum AlbumDetails {
     struct Response {
+        let album: Album
+        let artworkData: Data?
     }
     struct ViewModel {
+        struct Album {
+            let name: String
+            let artist: String
+            let artwork: Data?
+            let genre: String
+            let releaseDate: String
+            let copyright: String
+            let iTunesLink: URL?
+        }
+        let album: Album
     }
 }
