@@ -18,15 +18,12 @@ enum AlbumDetails {
         let artworkData: Data?
     }
     struct ViewModel {
-        struct Album {
-            let name: String
-            let artist: String
-            let artwork: Data?
-            let genre: String
-            let releaseDate: String
-            let copyright: String
-            let iTunesLink: URL?
-        }
-        let album: Album
+        let name: String
+        let artist: String
+        let artwork: Data?
+        let genre: String
+        let releaseDate: String
+        let copyright: String
+        let iTunesLink: URL?
     }
 }

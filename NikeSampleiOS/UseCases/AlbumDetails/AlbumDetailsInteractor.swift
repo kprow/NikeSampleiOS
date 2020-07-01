@@ -27,7 +27,6 @@ class AlbumDetailsInteractor: AlbumDetailsBusinessLogic, AlbumDetailsDataStore {
     // MARK: Fetch Album
 
     func fetchAlbum() {
-        let response = AlbumDetails.Response()
-        presenter?.presentSomething(response: response)
+        // need to implement
     }
 }

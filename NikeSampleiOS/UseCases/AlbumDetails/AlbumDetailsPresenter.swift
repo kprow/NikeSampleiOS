@@ -13,7 +13,7 @@
 import UIKit
 
 protocol AlbumDetailsPresentationLogic {
-    func presentSomething(response: AlbumDetails.Response)
+    func presentAlbum(response: AlbumDetails.Response)
 }
 
 class AlbumDetailsPresenter: AlbumDetailsPresentationLogic {
@@ -21,8 +21,7 @@ class AlbumDetailsPresenter: AlbumDetailsPresentationLogic {
 
     // MARK: Fetch Album
 
-    func presentSomething(response: AlbumDetails.Response) {
-        let viewModel = AlbumDetails.ViewModel()
-        viewController?.displayAlbum(viewModel: viewModel)
+    func presentAlbum(response: AlbumDetails.Response) {
+        // need to implement
     }
 }

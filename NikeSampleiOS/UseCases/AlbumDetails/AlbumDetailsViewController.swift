@@ -56,6 +56,6 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
     }
 
     func displayAlbum(viewModel: AlbumDetails.ViewModel) {
-        //nameTextField.text = viewModel.name
+        // need to implement
     }
 }
