@@ -45,6 +45,22 @@ class AlbumDetailsViewControllerTests: XCTestCase {
 
     // MARK: Test doubles
 
+    class InteractorSpy: AlbumDetailsBusinessLogic {
+        var hasFetchAlbumBeenCalled = false
+        func fetchAlbum() {
+            hasFetchAlbumBeenCalled = true
+        }
+    }
     // MARK: Tests
 
+    func testViewDidLoadCallsFetchAlbums() {
+        // Given
+        let interactorSpy = InteractorSpy()
+        sut.interactor = interactorSpy
+        // When
+        sut.viewDidLoad()
+        // Then
+        XCTAssertTrue(interactorSpy.hasFetchAlbumBeenCalled,
+                      "When viewDidLoad is called we should fetchAlbum.")
+    }
 }
