@@ -12,21 +12,42 @@
 
 import UIKit
 
+/// Definition of the business logic that happens on the details screen.
 protocol AlbumDetailsBusinessLogic {
+    /// Fetches the album domain model for its details.
     func fetchAlbum()
 }
 
+/// The data needed for the details screen.
 protocol AlbumDetailsDataStore {
+    /// The album domain model needed for the details.
     var album: Album? { get set }
 }
 
 class AlbumDetailsInteractor: AlbumDetailsBusinessLogic, AlbumDetailsDataStore {
+    /// Dependency - To pass along entity model to be converted into a presentation(view model) object for the view.
     var presenter: AlbumDetailsPresentationLogic?
+    /// Dependency - A helperi to fetch data that will become album artwork
+    var dataCache: DataFetcher? = DataCacheFromUrl()
+
     var album: Album?
 
     // MARK: Fetch Album
 
     func fetchAlbum() {
-        // need to implement
+        if let album = album {
+            guard let artwork = album.artworkUrl100, let artworkUrl = URL(string: artwork) else {
+                presenter?.presentAlbum(response: AlbumDetails.Response(album: album, artworkData: nil))
+                return
+            }
+            dataCache?.getData(from: artworkUrl, { [unowned self](result) in
+                var artworkDataForPresenter: Data?
+                if case let Result.success(artowrkData) = result {
+                    artworkDataForPresenter = artowrkData
+                }
+                let response = AlbumDetails.Response(album: album, artworkData: artworkDataForPresenter)
+                self.presenter?.presentAlbum(response: response)
+            })
+        }
     }
 }

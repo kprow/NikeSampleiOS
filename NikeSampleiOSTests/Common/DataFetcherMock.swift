@@ -8,6 +8,7 @@
 
 @testable import NikeSampleiOS
 import Foundation
+
 class DataFetcherSpy: DataFetcher {
     static var dataCache = NSCache<AnyObject, AnyObject>()
 
