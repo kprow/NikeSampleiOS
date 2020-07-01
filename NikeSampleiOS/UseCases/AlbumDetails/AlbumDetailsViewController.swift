@@ -19,6 +19,59 @@ protocol AlbumDetailsDisplayLogic: class {
 class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
     var interactor: AlbumDetailsBusinessLogic?
 
+     // MARK: - Views
+
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    let albumNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 18.0)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let artistNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16.0)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let genreLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14.0)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let releaseDateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14.0)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    let copyrightLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12.0)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private func layoutViews() {
+        view.backgroundColor = .white
+        // Image
+        view.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
     // MARK: Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -46,6 +99,7 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        layoutViews()
         fetchAlbum()
     }
 
@@ -56,6 +110,8 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
     }
 
     func displayAlbum(viewModel: AlbumDetails.ViewModel) {
-        // need to implement
+        if let imageData = viewModel.artwork {
+            imageView.image = UIImage(data: imageData)
+        }
     }
 }

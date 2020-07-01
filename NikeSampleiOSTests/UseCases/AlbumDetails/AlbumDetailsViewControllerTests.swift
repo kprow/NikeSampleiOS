@@ -63,4 +63,27 @@ class AlbumDetailsViewControllerTests: XCTestCase {
         XCTAssertTrue(interactorSpy.hasFetchAlbumBeenCalled,
                       "When viewDidLoad is called we should fetchAlbum.")
     }
+    static let testImage: UIImage? = {
+         // Draw image
+         let size = CGSize(width: 10, height: 10)
+         UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+         // Capture renedered image
+         let image = UIGraphicsGetImageFromCurrentImageContext()
+         UIGraphicsEndImageContext()
+         return image
+     }()
+    let givenViewModel = AlbumDetails.ViewModel(
+        name: "Album Name",
+        artist: "Artist Name",
+        artwork: AlbumDetailsViewControllerTests.testImage?.pngData(),
+        genre: "Folk, Rock",
+        releaseDate: "2020-05-05",
+        copyright: "℗ 2020 Haim Productions Inc. under exclusive license to Columbia Records.",
+        iTunesLink: URL(string: "https://music.apple.com/us/album/women-in-music-pt-iii/1500345235?app=itunes"))
+    func testDisplayAlbumSetsImageViewImage() {
+        // When
+        sut.displayAlbum(viewModel: givenViewModel)
+        // Then
+        XCTAssertNotNil(sut.imageView.image, "displayAlbum should set the imageView.image.")
+    }
 }
