@@ -67,6 +67,16 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         label.numberOfLines = 0
         return label
     }()
+    let iTunesButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
+        button.titleLabel?.textAlignment = .center
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(Constants.iTunesButonText, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.addTarget(self, action: #selector(iTunesButtonPressed), for: .touchUpInside)
+        return button
+    }()
 
     private func layoutViews() {
         view.backgroundColor = .white
@@ -76,6 +86,7 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         view.addSubview(genreLabel)
         view.addSubview(releaseDateLabel)
         view.addSubview(copyrightLabel)
+        view.addSubview(iTunesButton)
         NSLayoutConstraint.activate([
             // Image
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -99,7 +110,11 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
             // Copyright
             copyrightLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: 10),
             copyrightLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            copyrightLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
+            copyrightLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            // Button
+            iTunesButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            iTunesButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            iTunesButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         ])
     }
     // MARK: Object lifecycle
@@ -148,5 +163,13 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         genreLabel.text = viewModel.genre
         releaseDateLabel.text = viewModel.releaseDate
         copyrightLabel.text = viewModel.copyright
+        iTunesUrl = viewModel.iTunesLink
+    }
+    var iTunesUrl: URL?
+    @objc func iTunesButtonPressed(_ sender: UIButton) {
+        guard let url = iTunesUrl else { return }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
     }
 }
