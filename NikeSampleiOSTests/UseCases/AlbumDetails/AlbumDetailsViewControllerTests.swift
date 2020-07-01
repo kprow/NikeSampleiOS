@@ -87,5 +87,7 @@ class AlbumDetailsViewControllerTests: XCTestCase {
         XCTAssertNotNil(sut.imageView.image, "displayAlbum should set the imageView.image.")
         XCTAssertEqual(givenViewModel.name, sut.albumNameLabel.text, "Unexpected view attribute.")
         XCTAssertEqual(givenViewModel.artist, sut.artistNameLabel.text, "Unexpected view attribute.")
+        XCTAssertEqual(givenViewModel.genre, sut.genreLabel.text, "Unexpected view attribute.")
+        XCTAssertEqual(givenViewModel.copyright, sut.copyrightLabel.text, "Unexpected view attribute.")
     }
 }

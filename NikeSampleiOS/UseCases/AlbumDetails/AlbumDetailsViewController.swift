@@ -73,18 +73,33 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         view.addSubview(imageView)
         view.addSubview(albumNameLabel)
         view.addSubview(artistNameLabel)
+        view.addSubview(genreLabel)
+        view.addSubview(releaseDateLabel)
+        view.addSubview(copyrightLabel)
         NSLayoutConstraint.activate([
             // Image
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             // Name
-            albumNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10.0),
-            albumNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10.0),
-            albumNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0),
+            albumNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+            albumNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            albumNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             // Artist
-            artistNameLabel.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: 10.0),
-            artistNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10.0),
-            artistNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0)
+            artistNameLabel.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: 10),
+            artistNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            artistNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            // Genre
+            genreLabel.topAnchor.constraint(equalTo: artistNameLabel.bottomAnchor, constant: 10),
+            genreLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            genreLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            // Release date
+            releaseDateLabel.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: 10),
+            releaseDateLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            releaseDateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            // Copyright
+            copyrightLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: 10),
+            copyrightLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            copyrightLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
         ])
     }
     // MARK: Object lifecycle
@@ -130,5 +145,8 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         }
         albumNameLabel.text = viewModel.name
         artistNameLabel.text = viewModel.artist
+        genreLabel.text = viewModel.genre
+        releaseDateLabel.text = viewModel.releaseDate
+        copyrightLabel.text = viewModel.copyright
     }
 }
