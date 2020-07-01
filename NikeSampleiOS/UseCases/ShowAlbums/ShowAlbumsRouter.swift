@@ -26,15 +26,13 @@ class ShowAlbumsRouter: ShowAlbumsRoutingLogic, ShowAlbumsDataPassing {
 
     func routeToAlbumDetails() {
         let detailsVC = AlbumDetailsViewController()
-        guard var destination = detailsVC.interactor as? AlbumDetailsDataStore,
-            let source = dataStore else {
-            return
+        if var destination = detailsVC.interactor as? AlbumDetailsDataStore,
+            let source = dataStore {
+            let row = viewController?.tableView.indexPathForSelectedRow?.row ?? 0
+            if source.albums.indices.contains(row) {
+                destination.album = source.albums[row]
+                viewController?.navigationController?.pushViewController(detailsVC, animated: true)
+            }
         }
-        let row = viewController?.tableView.indexPathForSelectedRow?.row ?? 0
-        guard source.albums.indices.contains(row) else {
-            return
-        }
-        destination.album = source.albums[row]
-        viewController?.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
