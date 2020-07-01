@@ -27,21 +27,26 @@ class DataCacheFromUrl: DataFetcher {
     var session: URLSessionProtocol = URLSession.shared
 
     func getData(from url: URL, _ completionHandler: @escaping (Result<Data, Error>) -> Void) {
-        let request = URLRequest(url: url)
-        session.dataTask(with: request) { (data, _, error) in
-            DispatchQueue.main.async {
-                if let err = error {
-                    completionHandler(.failure(err))
-                    return
+        if let cahcedData = DataCacheFromUrl.dataCache.object(forKey: url as AnyObject) as? Data {
+            completionHandler(.success(cahcedData))
+        } else {
+            let request = URLRequest(url: url)
+            session.dataTask(with: request) { (data, _, error) in
+                DispatchQueue.main.async {
+                    if let err = error {
+                        completionHandler(.failure(err))
+                        return
+                    }
+                    guard let data = data else {
+                        completionHandler(.failure(DataError.noData))
+                        return
+                    }
+                    // Happy case 😃
+                    DataCacheFromUrl.dataCache.setObject(data as AnyObject, forKey: url as AnyObject)
+                    completionHandler(.success(data))
                 }
-                guard let data = data else {
-                    completionHandler(.failure(DataError.noData))
-                    return
-                }
-                // Happy case 😃
-                completionHandler(.success(data))
-            }
-        }.resume()
+            }.resume()
+        }
     }
 }
 extension DataCacheFromUrl {

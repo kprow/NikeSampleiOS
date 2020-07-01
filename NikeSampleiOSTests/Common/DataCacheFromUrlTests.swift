@@ -27,6 +27,7 @@ class DataCacheFromUrlTests: XCTestCase {
             XCTFail("Unable to create url.")
             return
         }
+        DataCacheFromUrl.dataCache .removeAllObjects()
         let sessionSpy = URLSessionSpy()
         sut.session = sessionSpy
         // When
@@ -43,6 +44,7 @@ class DataCacheFromUrlTests: XCTestCase {
             XCTFail("Unable to create url.")
             return
         }
+        DataCacheFromUrl.dataCache .removeAllObjects()
         let dataTaskSpy = URLSessionDataTaskSpy()
         let sessionMock = URLSessionSpy()
         sessionMock.injectableDataTaskReturn = dataTaskSpy
@@ -61,6 +63,7 @@ class DataCacheFromUrlTests: XCTestCase {
             XCTFail("Unable to create url.")
             return
         }
+        DataCacheFromUrl.dataCache .removeAllObjects()
         let sessionMock = URLSessionSpy()
         sessionMock.injectableDataTaskError = NSError(domain: "", code: 0, userInfo: nil)
         sut.session = sessionMock
@@ -88,6 +91,7 @@ class DataCacheFromUrlTests: XCTestCase {
             XCTFail("Unable to create url.")
             return
         }
+        DataCacheFromUrl.dataCache .removeAllObjects()
         let sessionMock = URLSessionSpy()
         sessionMock.injectableDataTaskData = nil
         sut.session = sessionMock
@@ -137,6 +141,25 @@ class DataCacheFromUrlTests: XCTestCase {
         waitForExpectations(timeout: 1.0) { (err) in
             if let err = err {
                 XCTFail("Waiting for expectation failed. \(err)")
+            }
+        }
+    }
+    func testFetchDataWhenCachedSucceeds() {
+        // Given
+        guard let url = URL(string: "google.com") else {
+            XCTFail("Unable to create url.")
+            return
+        }
+        let givenData = "Chello world".data(using: .utf8) ?? Data()
+        DataCacheFromUrl.dataCache.setObject(givenData as AnyObject, forKey: url as AnyObject)
+        // When
+        sut.getData(from: url) { (result) in
+            // Then
+            if case let Result.success(observedData) = result {
+                XCTAssertEqual(givenData, observedData,
+                               "The data returned in the completion handler should be the givenData that was cached")
+            } else {
+                XCTFail("We should not have a failure if the data is cached.")
             }
         }
     }
