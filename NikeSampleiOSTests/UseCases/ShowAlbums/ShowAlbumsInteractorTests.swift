@@ -60,20 +60,6 @@ class ShowAlbumsInteractorTests: XCTestCase {
             observePresentAlbumArtwork = artwork
         }
     }
-    class DataFetcherSpy: DataFetcher {
-        static var dataCache = NSCache<AnyObject, AnyObject>()
-
-        var hasGetDataBeenCalled = false
-        var observeGetDataUrl: URL?
-        var injectableGetDataResult: Result<Data, Error>?
-        func getData(from url: URL, _ completionHandler: @escaping (Result<Data, Error>) -> Void) {
-            hasGetDataBeenCalled = true
-            observeGetDataUrl = url
-            if let result = injectableGetDataResult {
-                completionHandler(result)
-            }
-        }
-    }
 
     // MARK: Tests
 
