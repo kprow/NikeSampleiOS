@@ -80,10 +80,12 @@ class AlbumDetailsViewControllerTests: XCTestCase {
         releaseDate: "2020-05-05",
         copyright: "℗ 2020 Haim Productions Inc. under exclusive license to Columbia Records.",
         iTunesLink: URL(string: "https://music.apple.com/us/album/women-in-music-pt-iii/1500345235?app=itunes"))
-    func testDisplayAlbumSetsImageViewImage() {
+    func testDisplayAlbumSetsViewAttributes() {
         // When
         sut.displayAlbum(viewModel: givenViewModel)
         // Then
         XCTAssertNotNil(sut.imageView.image, "displayAlbum should set the imageView.image.")
+        XCTAssertEqual(givenViewModel.name, sut.albumNameLabel.text, "Unexpected view attribute.")
+        XCTAssertEqual(givenViewModel.artist, sut.artistNameLabel.text, "Unexpected view attribute.")
     }
 }

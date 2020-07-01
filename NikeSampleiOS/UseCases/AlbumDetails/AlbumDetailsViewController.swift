@@ -32,6 +32,7 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
     let artistNameLabel: UILabel = {
@@ -39,6 +40,7 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         label.font = UIFont.systemFont(ofSize: 16.0)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
     let genreLabel: UILabel = {
@@ -46,6 +48,7 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         label.font = UIFont.systemFont(ofSize: 14.0)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
     let releaseDateLabel: UILabel = {
@@ -53,6 +56,7 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         label.font = UIFont.systemFont(ofSize: 14.0)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
     let copyrightLabel: UILabel = {
@@ -60,16 +64,27 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         label.font = UIFont.systemFont(ofSize: 12.0)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         return label
     }()
 
     private func layoutViews() {
         view.backgroundColor = .white
-        // Image
         view.addSubview(imageView)
+        view.addSubview(albumNameLabel)
+        view.addSubview(artistNameLabel)
         NSLayoutConstraint.activate([
+            // Image
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            // Name
+            albumNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10.0),
+            albumNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10.0),
+            albumNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0),
+            // Artist
+            artistNameLabel.topAnchor.constraint(equalTo: albumNameLabel.bottomAnchor, constant: 10.0),
+            artistNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10.0),
+            artistNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10.0)
         ])
     }
     // MARK: Object lifecycle
@@ -113,5 +128,7 @@ class AlbumDetailsViewController: UIViewController, AlbumDetailsDisplayLogic {
         if let imageData = viewModel.artwork {
             imageView.image = UIImage(data: imageData)
         }
+        albumNameLabel.text = viewModel.name
+        artistNameLabel.text = viewModel.artist
     }
 }
