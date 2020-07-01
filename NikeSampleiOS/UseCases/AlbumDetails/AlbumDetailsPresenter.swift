@@ -22,6 +22,23 @@ class AlbumDetailsPresenter: AlbumDetailsPresentationLogic {
     // MARK: Fetch Album
 
     func presentAlbum(response: AlbumDetails.Response) {
-        // need to implement
+        var genreString = ""
+        if let genre = response.album.genres {
+            let genresArray = genre.filter { $0.name != nil }.map { $0.name }.compactMap { $0 }
+            genreString = genresArray.joined(separator: ", ")
+        }
+        var albumURL: URL?
+        if let urlString = response.album.url {
+            albumURL = URL(string: urlString)
+        }
+        let viewModel = AlbumDetails.ViewModel(
+            name: response.album.name ?? Constants.unknownAlbumName,
+            artist: response.album.artistName ?? Constants.unknownArtistName,
+            artwork: response.artworkData,
+            genre: genreString,
+            releaseDate: response.album.releaseDate ?? "",
+            copyright: response.album.copyright ?? "",
+            iTunesLink: albumURL)
+        viewController?.displayAlbum(viewModel: viewModel)
     }
 }

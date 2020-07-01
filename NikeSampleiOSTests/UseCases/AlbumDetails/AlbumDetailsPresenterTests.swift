@@ -37,5 +37,84 @@ class AlbumDetailsPresenterTests: XCTestCase {
 
     // MARK: Test doubles
 
+    class ViewControllerSpy: AlbumDetailsDisplayLogic {
+        var hasDisplayAlbumBeenCalled = false
+        var observeDisplayAlbumViewModel: AlbumDetails.ViewModel?
+        func displayAlbum(viewModel: AlbumDetails.ViewModel) {
+            hasDisplayAlbumBeenCalled = true
+            observeDisplayAlbumViewModel = viewModel
+        }
+    }
+
     // MARK: Tests
+
+    let testImage: UIImage? = {
+        // Draw image
+        let size = CGSize(width: 10, height: 10)
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+        // Capture renedered image
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }()
+
+    func testPresentAlbumCallsDisplayAlbum() {
+        // Given
+        let vcSpy = ViewControllerSpy()
+        sut.viewController = vcSpy
+        let givenAlbum = Album(
+            artistName: "Artist",
+            id: nil,
+            releaseDate: "2020-06-26",
+            name: "Album Name",
+            kind: nil,
+            copyright: "℗ 2020 Haim Productions Inc. under exclusive license to Columbia Records.",
+            artistId: nil,
+            contentAdvisoryRating: nil,
+            artistUrl: nil,
+            artworkUrl100: nil,
+            genres: [Genre(genreId: "1", name: "Classical", url: nil)],
+            url: "https://music.apple.com/us/album/women-in-music-pt-iii/1500345235?app=itunes")
+        // When
+        sut.presentAlbum(response: AlbumDetails.Response(album: givenAlbum, artworkData: testImage?.pngData()))
+        XCTAssert(vcSpy.hasDisplayAlbumBeenCalled, "presentAlbum should call displayAlbum")
+        XCTAssertEqual(givenAlbum.name, vcSpy.observeDisplayAlbumViewModel?.name, "Unexpected view model.")
+        XCTAssertEqual(givenAlbum.artistName, vcSpy.observeDisplayAlbumViewModel?.artist, "Unexpected view model.")
+        XCTAssertEqual(testImage?.pngData(), vcSpy.observeDisplayAlbumViewModel?.artwork, "Unexpected view model.")
+        XCTAssertEqual("Classical", vcSpy.observeDisplayAlbumViewModel?.genre, "Unexpected view model.")
+        XCTAssertEqual(givenAlbum.releaseDate, vcSpy.observeDisplayAlbumViewModel?.releaseDate,
+                       "Unexpected view model.")
+        XCTAssertEqual(givenAlbum.copyright, vcSpy.observeDisplayAlbumViewModel?.copyright, "Unexpected view model.")
+        XCTAssertEqual(URL(string: givenAlbum.url ?? ""), vcSpy.observeDisplayAlbumViewModel?.iTunesLink,
+                       "Unexpected view model.")
+    }
+    func testPresentAlbumCallsDisplayAlbumWithDefaults() {
+        // Given
+        let vcSpy = ViewControllerSpy()
+        sut.viewController = vcSpy
+        let givenAlbum = Album(
+            artistName: nil,
+            id: nil,
+            releaseDate: nil,
+            name: nil,
+            kind: nil,
+            copyright: nil,
+            artistId: nil,
+            contentAdvisoryRating: nil,
+            artistUrl: nil,
+            artworkUrl100: nil,
+            genres: nil,
+            url: nil)
+        // When
+        sut.presentAlbum(response: AlbumDetails.Response(album: givenAlbum, artworkData: nil))
+        XCTAssertEqual(Constants.unknownAlbumName, vcSpy.observeDisplayAlbumViewModel?.name,
+                       "Unexpected default view model.")
+        XCTAssertEqual(Constants.unknownArtistName, vcSpy.observeDisplayAlbumViewModel?.artist,
+                       "Unexpected default view model.")
+        XCTAssertNil(vcSpy.observeDisplayAlbumViewModel?.artwork, "Unexpected default view model.")
+        XCTAssertEqual("", vcSpy.observeDisplayAlbumViewModel?.genre, "Unexpected default view model.")
+        XCTAssertEqual("", vcSpy.observeDisplayAlbumViewModel?.releaseDate, "Unexpected default view model.")
+        XCTAssertEqual("", vcSpy.observeDisplayAlbumViewModel?.copyright, "Unexpected default view model.")
+        XCTAssertNil(vcSpy.observeDisplayAlbumViewModel?.iTunesLink, "Unexpected default view model.")
+    }
 }
